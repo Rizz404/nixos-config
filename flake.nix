@@ -1,11 +1,18 @@
 {
-  description = "Konfigurasi NixOS modular untuk rizz404";
+  description = "NixOS modular configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+
+    home-manager = {
+	    url = "github:nix-community/home-manager/release-26.05";
+	    inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, ... }: {
+  
+
+  outputs = { self, nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       dell-slim-ecs1250-office = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -19,7 +26,14 @@
           ./modules/desktop/plasma.nix
           ./modules/desktop/apps.nix
           ./modules/desktop/kde-apps.nix
-          ./modules/desktop/fonts.nix
+          ./modules/desktop/fonts.nix,
+
+          home-manager.nixosModules.home-manager
+                  {
+                    home-manager.useGlobalPkgs = true;
+                    home-manager.useUserPackages = true;
+                    home-manager.users.rizz404 = import ./home/rizz404/default.nix;
+                  }
         ];
       };
     };
