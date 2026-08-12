@@ -11,7 +11,7 @@
     php
     postgresql
     python3
-    rustdesk
+	rustdesk    
     vscode
 
     btop
