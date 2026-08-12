@@ -26,7 +26,7 @@
           ./modules/desktop/plasma.nix
           ./modules/desktop/apps.nix
           ./modules/desktop/kde-apps.nix
-          ./modules/desktop/fonts.nix,
+          ./modules/desktop/fonts.nix
 
           home-manager.nixosModules.home-manager
                   {
