@@ -14,10 +14,11 @@
 
   
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, nix-cachyos-kernel, ... }@inputs: {
     nixosConfigurations = {
       dell-slim-ecs1250-office = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/dell-slim-ecs1250-office/configuration.nix
           ./modules/system/core.nix
@@ -25,6 +26,7 @@
           ./modules/system/devtools.nix
           ./modules/system/network.nix
           ./modules/system/swap.nix
+          ./modules/system/kernel.nix 
           ./modules/desktop/plasma.nix
           ./modules/desktop/apps.nix
           ./modules/desktop/kde-apps.nix
