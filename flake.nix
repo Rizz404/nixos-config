@@ -30,9 +30,10 @@
 
           home-manager.nixosModules.home-manager
                   {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.users.rizz404 = import ./home/rizz404/default.nix;
+                   home-manager.useGlobalPkgs = true;
+                   home-manager.useUserPackages = true;
+                   home-manager.backupFileExtension = "backup";
+                   home-manager.users.rizz404 = import ./home/rizz404/default.nix;
                   }
         ];
       };
