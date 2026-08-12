@@ -8,6 +8,8 @@
 	    url = "github:nix-community/home-manager/release-26.05";
 	    inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
   };
 
   
