@@ -1,19 +1,17 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+  	# desktop
     bruno
+	rustdesk
+    vscode
+
+	# cli tools    
     claude-code
     delta
     gh
     lazygit
     micro
-    pgcli
-    php
-    postgresql
-    python3
-	rustdesk    
-    vscode
-
     btop
     chafa
     duf
@@ -29,5 +27,21 @@
     unrar
     rclone
     yt-dlp
+
+    # database and its tools
+    pgcli
+    postgresql
+
+	# programming language
+    php
+    python3
+    jdk25
+    nodejs
+    go
+    golangci-lint
+    bun
+    maven
+    dart
+    flutter
   ];
 }
