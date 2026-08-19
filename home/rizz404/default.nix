@@ -1,10 +1,11 @@
 { pkgs, ... }:
 {
   imports = [
-    ./fish.nix
-    ./starship.nix
-    ./git.nix
-    ./wezterm.nix
+    ./fish
+    ./starship
+    ./git
+    ./wezterm
+    ./micro
   ];
 
   home.stateVersion = "26.05";
