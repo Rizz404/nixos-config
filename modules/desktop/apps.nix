@@ -9,5 +9,6 @@
     scrcpy
     mpv
     pavucontrol
+    varia
   ];
 }
