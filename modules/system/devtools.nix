@@ -27,6 +27,9 @@
     unrar
     rclone
     yt-dlp
+    wl-clipboard
+    fzf
+    aspell      
 
     # database and its tools
     pgcli
