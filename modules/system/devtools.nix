@@ -6,7 +6,7 @@
 	rustdesk
     vscode
 
-	# cli tools    
+	# cli tools
     claude-code
     delta
     gh
@@ -29,7 +29,8 @@
     yt-dlp
     wl-clipboard
     fzf
-    aspell      
+    aspell
+    eza
 
     # database and its tools
     pgcli
