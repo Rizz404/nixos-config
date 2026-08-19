@@ -1,0 +1,8 @@
+{
+  "Alt-f": "command:filemanager",
+  "Ctrl-t": "tab",
+  "Ctrl-w": "quit",
+  "Alt-Left": "previousTab",
+  "Alt-Right": "nextTab",
+  "Alt-/": "command:comment"
+}

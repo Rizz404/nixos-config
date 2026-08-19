@@ -1,0 +1,22 @@
+{
+  "autoclose": true,
+  "autoindent": true,
+  "clipboard": "external",
+  "cursorline": true,
+  "diffgutter": true,
+  "hlsearch": true,
+  "keepautoindent": true,
+  "mkparents": true,
+  "mouse": true,
+  "rmtrailingws": true,
+  "ruler": true,
+  "savecursor": true,
+  "saveundo": true,
+  "scrollbar": true,
+  "softwrap": true,
+  "statusline": true,
+  "tabmovement": true,
+  "tabsize": 4,
+  "tabstospaces": true,
+  "wordwrap": true
+}
