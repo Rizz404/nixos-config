@@ -23,7 +23,8 @@
         ./modules/system/devtools.nix
         ./modules/system/network.nix
         ./modules/system/swap.nix
-        ./modules/system/kernel.nix  
+        ./modules/system/kernel.nix
+        ./modules/system/gc.nix
         ./modules/desktop/plasma.nix
         ./modules/desktop/apps.nix
         ./modules/desktop/kde-apps.nix
