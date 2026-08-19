@@ -6,6 +6,7 @@
     ./git
     ./wezterm
     ./micro
+    ./hyprland
   ];
 
   home.stateVersion = "26.05";
