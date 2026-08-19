@@ -1,8 +1,17 @@
 {
-  "Alt-f": "command:filemanager",
-  "Ctrl-t": "tab",
-  "Ctrl-w": "quit",
-  "Alt-Left": "previousTab",
-  "Alt-Right": "nextTab",
-  "Alt-/": "command:comment"
+  "Ctrl-b": "command:tree",
+  "Ctrl-p": "command:fzf",
+  "Ctrl-w": "Quit",
+  "Ctrl-t": "AddTab",
+  "Ctrl-Tab": "NextTab",
+  "Ctrl-Shift-Tab": "PreviousTab",
+  "Alt-Left": "PreviousTab",
+  "Alt-Right": "NextTab",
+  "Alt-Up": "MoveLinesUp",
+  "Alt-Down": "MoveLinesDown",
+  "Alt-/": "command:comment",
+  "CtrlUnderscore": "command:comment",
+  "Ctrl-g": "JumpLine",
+  "Ctrl-Shift-p": "CommandMode",
+  "Alt-j": "command:jump"
 }
