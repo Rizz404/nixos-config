@@ -31,6 +31,7 @@
     fzf
     aspell
     eza
+    arch-install-scripts
 
     # database and its tools
     pgcli

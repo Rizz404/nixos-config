@@ -6,7 +6,6 @@
     variant = "";
   };
 
-  services.displayManager.defaultSession = "plasmax11";
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
