@@ -10,4 +10,6 @@ in
     package = null; # paket sudah disediakan system-wide lewat modules/desktop/hyprland.nix
     extraConfig = builtins.readFile ./common.conf + "\n" + builtins.readFile hostConf;
   };
+
+  xdg.portal.config.common.default = "*";
 }
