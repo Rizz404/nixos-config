@@ -134,7 +134,7 @@ ForegroundVisited=198,160,246
 
 [General]
 BrowserApplication=brave-browser.desktop
-ColorScheme=Scratchy
+ColorScheme=CatppuccinMochaBlue
 ColorSchemeHash=34bd8bad1192a8d612892100d65539ea91e87b50
 TerminalApplication=wezterm start --cwd .
 TerminalService=org.wezfurlong.wezterm.desktop
@@ -147,7 +147,7 @@ Theme=Papirus-Dark
 
 [KDE]
 AnimationDurationFactor=0.5
-LookAndFeelPackage=CachyOS-Nord
+LookAndFeelPackage=Catppuccin-Mocha-Blue
 contrast=4
 frameContrast=0.2
 widgetStyle=Breeze
