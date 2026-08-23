@@ -23,6 +23,13 @@
     '';
   };
 
+  boot.kernelParams = [
+    "i915.enable_psr=0"
+    "i915.enable_fbc=0"
+    "i915.enable_dc=0"
+    "intel_idle.max_cstate=4"
+  ];
+
   system.activationScripts.limineBootPolicy = {
     deps = [ "etc" ];
     text = ''
