@@ -7,7 +7,7 @@
       "Switch to Next Keyboard Layout" = "Meta+Alt+K";
     };
 
-    "com.github.hluk.copyq"."LOGO+V||Show/hide main window" = "Meta+V";
+    "com.github.hluk.copyq"."LOGO+V||Show/hide main window" = "Meta+Shift+V";
 
     kaccess."Toggle Screen Reader On and Off" = "Meta+Alt+S";
 
