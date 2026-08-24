@@ -165,7 +165,7 @@ DialogHeight=630
 DialogWidth=810
 
 [Containments][190][Applets][193][Configuration][General]
-launchers=preferred://filemanager,applications:systemsettings.desktop,preferred://browser,applications:org.wezfurlong.wezterm.desktop,applications:code.desktop,applications:com.rtosta.zapzap.desktop
+launchers=preferred://filemanager,applications:systemsettings.desktop,preferred://browser,applications:org.wezfurlong.wezterm.desktop,applications:code.desktop
 
 [Containments][190][Applets][194]
 immutability=1
