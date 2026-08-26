@@ -6,7 +6,7 @@
 	  rustdesk-flutter
     vscode
 
-	# cli tools
+	  # cli tools
     claude-code
     delta
     gh
@@ -32,12 +32,15 @@
     aspell
     eza
     arch-install-scripts
+    podman
+    podman-compose
+    podman-tui
 
     # database and its tools
     pgcli
     postgresql
 
-	# programming language
+	  # programming language
     php
     python3
     jdk25
