@@ -3,7 +3,7 @@
   environment.systemPackages = with pkgs; [
   	# desktop
     bruno
-	rustdesk
+	  rustdesk-flutter
     vscode
 
 	# cli tools
