@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  # biar command `locate` punya database yang ke-update otomatis (dipakai plocate)
+  services.locate.enable = true;
+
   environment.systemPackages = with pkgs; [
   	# desktop
     bruno
@@ -8,7 +11,6 @@
 
 	  # cli tools
     claude-code
-    delta
     gh
     lazygit
     micro
@@ -28,9 +30,9 @@
     rclone
     yt-dlp
     wl-clipboard
-    fzf
     aspell
-    eza
+    aspellDicts.en
+    aspellDicts.id
     arch-install-scripts
     podman
     podman-compose

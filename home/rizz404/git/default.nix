@@ -10,4 +10,9 @@
       init.defaultBranch = "main";
     };
   };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+  };
 }
