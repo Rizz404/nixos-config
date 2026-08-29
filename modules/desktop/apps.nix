@@ -7,6 +7,7 @@
     onlyoffice-desktopeditors
     qbittorrent
     scrcpy
+    android-tools # nyediain `adb` yang dipakai scrcpy buat konek ke HP
     mpv
     pavucontrol
     varia
