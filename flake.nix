@@ -28,6 +28,7 @@
         ./modules/system/shell.nix
         ./modules/system/devtools.nix
         ./modules/system/network.nix
+        ./modules/system/containers.nix
         ./modules/system/swap.nix
         ./modules/system/kernel.nix
         ./modules/system/gc.nix
