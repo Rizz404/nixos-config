@@ -17,5 +17,6 @@
     htop
     tree
     vim
+    efibootmgr
   ];
 }
