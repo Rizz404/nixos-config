@@ -2,6 +2,10 @@
 {
   # biar command `locate` punya database yang ke-update otomatis (dipakai plocate)
   services.locate.enable = true;
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+  };
 
   environment.systemPackages = with pkgs; [
   	# desktop
@@ -37,6 +41,15 @@
     podman
     podman-compose
     podman-tui
+    iw
+    pciutils
+    usbutils
+    aircrack-ng
+    wireshark
+    # reaver
+    bully
+    wpa_supplicant
+    wirelesstools
 
     # database and its tools
     pgcli
