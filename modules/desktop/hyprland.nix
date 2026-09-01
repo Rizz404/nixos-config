@@ -23,15 +23,15 @@
 
     # launcher — dua-duanya, pilih salah satu per-host di hyprland.conf
     wofi
-    rofi-wayland
+    rofi
 
     # notifikasi — dua-duanya
     mako
-    swaync
+    swaynotificationcenter
 
     # wallpaper — dua-duanya
     hyprpaper
-    swww
+    awww
 
     hyprlock
     hypridle
@@ -43,5 +43,10 @@
     grim
     slurp
     swappy
+
+    kitty          # terminal (dolphin buat file manager udah ada via Plasma)
+    hyprlauncher   # menu/app launcher bawaan Hypr ecosystem
+    brightnessctl  # tombol brightness laptop
+    playerctl      # tombol media next/prev/play-pause
   ];
 }
