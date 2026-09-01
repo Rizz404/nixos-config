@@ -34,6 +34,7 @@
         ./modules/system/gc.nix
         ./modules/system/nix-ld.nix
         ./modules/desktop/plasma.nix
+        ./modules/desktop/hyprland.nix
         ./modules/desktop/apps.nix
         ./modules/desktop/kde-apps.nix
         ./modules/desktop/fonts.nix
