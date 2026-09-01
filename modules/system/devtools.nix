@@ -46,7 +46,7 @@
     usbutils
     aircrack-ng
     wireshark
-    # reaver
+    reaverwps
     bully
     wpa_supplicant
     wirelesstools
