@@ -50,6 +50,8 @@
     bully
     wpa_supplicant
     wirelesstools
+    imagemagick
+    ffmpeg
 
     # database and its tools
     pgcli
