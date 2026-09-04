@@ -1,4 +1,28 @@
 { pkgs, ... }:
+let
+  # mako & swaync sama-sama ship dbus-1/services/*.service yang klaim
+  # `org.freedesktop.Notifications` — busname yang sama persis dipakai
+  # plasma-workspace. File itu di-scan GLOBAL sama D-Bus session bus
+  # (lewat XDG_DATA_DIRS), gak peduli session Plasma atau Hyprland yang
+  # lagi jalan, jadi kalau dipasang apa adanya salah satunya bisa nyolong
+  # notifikasi Plasma walau kita lagi login ke Plasma (kejadian beneran,
+  # bukan cuma teori). Makanya cuma satu yang dipasang (mako — lebih
+  # ringan), dan busname file-nya dibuang biar dia cuma jalan kalau
+  # di-exec manual dari hyprland.lua, gak auto-activate lewat dbus.
+  mako' = pkgs.mako.overrideAttrs (old: {
+    postInstall = (old.postInstall or "") + ''
+      rm -f $out/share/dbus-1/services/fr.emersion.mako.service
+    '';
+  });
+
+  # Mau pindah ke swaync (ada notification-center panel)? Uncomment ini,
+  # comment mako' di bawah, terus ganti exec-once mako -> swaync di hyprland.lua.
+  # swaync' = pkgs.swaynotificationcenter.overrideAttrs (old: {
+  #   postInstall = (old.postInstall or "") + ''
+  #     rm -f $out/share/dbus-1/services/org.erikreider.swaync.service
+  #   '';
+  # });
+in
 {
   programs.hyprland = {
     enable = true;
@@ -25,9 +49,9 @@
     wofi
     rofi
 
-    # notifikasi — dua-duanya
-    mako
-    swaynotificationcenter
+    # notifikasi — cuma mako, swaync di-skip karena busname-nya bentrok (lihat komentar di atas)
+    mako'
+    # swaync'
 
     # wallpaper — dua-duanya
     hyprpaper
