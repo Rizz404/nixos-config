@@ -32,6 +32,7 @@ in
     ./kwin.nix
     ./apps.nix
     ./misc.nix
+    ./theme.nix
   ];
 
   home.packages = [

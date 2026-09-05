@@ -30,15 +30,6 @@
           "Speedbar Width" = 140;
           "View Style" = "DetailTree";
         };
-
-        WM = {
-          activeBackground = "38,41,46";
-          activeBlend = "38,41,46";
-          activeForeground = "252,252,252";
-          inactiveBackground = "38,41,46";
-          inactiveBlend = "38,41,46";
-          inactiveForeground = "177,177,177";
-        };
       };
 
       krunnerrc.General.FreeFloating = true;
