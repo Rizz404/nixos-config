@@ -72,6 +72,15 @@
             ./hosts/dell-latitude-e7450-personal/configuration.nix
           ] ++ sharedModules;
         };
+
+        # Host Laptop Personal
+        lenovo-thinkpad-t14-personal = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/lenovo-thinkpad-t14-personal/configuration.nix
+          ] ++ sharedModules;
+        };
       };
     };
 }
