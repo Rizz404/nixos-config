@@ -79,6 +79,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/lenovo-thinkpad-t14-personal/configuration.nix
+            ./modules/system/battery.nix
           ] ++ sharedModules;
         };
       };
