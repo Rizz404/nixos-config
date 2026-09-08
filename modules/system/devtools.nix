@@ -52,6 +52,14 @@
     wirelesstools
     imagemagick
     ffmpeg
+    stress-ng
+    linuxPackages.cpupower
+    evtest
+    libinput
+    alsa-utils
+    # amixer
+    lm_sensors
+    ethtool
 
     # database and its tools
     pgcli
