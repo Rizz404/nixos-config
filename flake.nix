@@ -30,7 +30,7 @@
         ./modules/system/network.nix
         ./modules/system/containers.nix
         ./modules/system/swap.nix
-        ./modules/system/kernel.nix
+        # ./modules/system/kernel.nix
         ./modules/system/gc.nix
         ./modules/system/nix-ld.nix
         ./modules/desktop/plasma.nix
