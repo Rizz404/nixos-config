@@ -8,12 +8,13 @@
   };
 
   environment.systemPackages = with pkgs; [
-  	# desktop
+    # desktop
     bruno
-	  rustdesk-flutter
+    rustdesk-flutter
     vscode
+    telegram-desktop
 
-	  # cli tools
+    # cli tools
     claude-code
     gh
     lazygit
@@ -25,6 +26,9 @@
     fastfetch
     plocate
     ripgrep
+    fd
+    bat
+    jq
     tesseract
     xh
     p7zip
@@ -32,20 +36,20 @@
     zip
     unrar
     rclone
+    restic
     yt-dlp
     wl-clipboard
     aspell
     aspellDicts.en
     aspellDicts.id
     arch-install-scripts
-    podman
     podman-compose
     podman-tui
+    zellij
     iw
     pciutils
     usbutils
     aircrack-ng
-    wireshark
     reaverwps
     bully
     wpa_supplicant
@@ -57,16 +61,18 @@
     evtest
     libinput
     alsa-utils
-    # amixer
     lm_sensors
     ethtool
+    psmisc
 
     # database and its tools
     pgcli
     postgresql
+    mycli
 
-	  # programming language
+    # programming language
     php
+    php.packages.composer
     python3
     jdk25
     nodejs
@@ -76,5 +82,8 @@
     maven
     dart
     flutter
+
+    # wordpress site management
+    wp-cli
   ];
 }

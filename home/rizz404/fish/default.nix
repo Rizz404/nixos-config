@@ -13,6 +13,11 @@
     enableFishIntegration = true;
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
