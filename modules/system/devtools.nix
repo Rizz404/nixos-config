@@ -65,6 +65,7 @@
     ethtool
     psmisc
     bind
+    openssl
 
     # database and its tools
     pgcli
