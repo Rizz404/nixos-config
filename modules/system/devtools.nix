@@ -64,6 +64,7 @@
     lm_sensors
     ethtool
     psmisc
+    bind
 
     # database and its tools
     pgcli
