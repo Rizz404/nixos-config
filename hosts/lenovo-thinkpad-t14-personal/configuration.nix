@@ -1,6 +1,12 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
+
+  # biar nixos-rebuild gak cuma pakai 2 dari 12 thread yang ada, override swap.nix
+  nix.settings = {
+    max-jobs = lib.mkForce 4;
+    cores = lib.mkForce 3;
+  };
 
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub.enable = false;
