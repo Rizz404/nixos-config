@@ -66,6 +66,7 @@
     psmisc
     bind
     openssl
+    samba
 
     # database and its tools
     pgcli
