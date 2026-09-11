@@ -11,5 +11,6 @@
     mpv
     pavucontrol
     varia
+    (pkgs.callPackage ../../pkgs/ab-download-manager.nix { })
   ];
 }
