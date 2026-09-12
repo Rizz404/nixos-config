@@ -69,7 +69,7 @@
     samba
     pdfarranger
     qpdf
-    xpdf-4.06
+    xpdf
 
     # database and its tools
     pgcli
