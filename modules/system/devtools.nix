@@ -67,6 +67,9 @@
     bind
     openssl
     samba
+    pdfarranger
+    qpdf
+    xpdf-4.06
 
     # database and its tools
     pgcli
