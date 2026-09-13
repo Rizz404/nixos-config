@@ -2,6 +2,7 @@
 {
   services.tlp = {
     enable = true;
+    pd.enable = true;
     settings = {
       START_CHARGE_THRESH_BAT0 = 50;
       STOP_CHARGE_THRESH_BAT0 = 90;

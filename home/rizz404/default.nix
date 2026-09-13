@@ -7,6 +7,7 @@
     ./wezterm
     ./micro
     ./hyprland
+    ./noctalia
     ./kde
     ./mpv
   ];

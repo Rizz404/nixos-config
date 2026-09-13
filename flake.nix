@@ -16,6 +16,8 @@
     };
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+
+    noctalia.url = "github:noctalia-dev/noctalia";
   };
 
   outputs = { self, nixpkgs, home-manager, nix-cachyos-kernel, ... }@inputs:
@@ -47,6 +49,7 @@
 
           home-manager.sharedModules = [
             inputs.plasma-manager.homeModules.plasma-manager
+            inputs.noctalia.homeModules.default
           ];
 
           home-manager.users.rizz404 = import ./home/rizz404/default.nix;
