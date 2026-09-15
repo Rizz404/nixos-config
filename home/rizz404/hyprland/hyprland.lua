@@ -46,6 +46,34 @@ local menu        = "hyprlauncher"
 --
 -- (Noctalia sendiri sudah di-autostart dari noctalia.lua, gak perlu diulang di sini)
 
+-- Matiin drkonqi-coredump-launcher.socket pas Hyprland nyala.
+-- DrKonqi (crash reporter Plasma) coba nge-pop-up dialog tiap ada app yang
+-- crash, tapi under Hyprland dia sendiri gagal init Qt platform-nya →
+-- ke-abort berkali-kali per satu crash asli (bisa 10-20x coredump sampah
+-- cuma buat 1 crash beneran). `stop` doang (bukan mask/disable), jadi cuma
+-- kepake selama sesi Hyprland ini nyala — pas logout & login ke Plasma
+-- lagi, systemd user manager restart fresh dan DrKonqi balik aktif normal
+-- di sana (dicek: Linger=no, jadi user@.service emang restart tiap login).
+hl.on("hyprland.start", function()
+    hl.exec_cmd("systemctl --user stop drkonqi-coredump-launcher.socket")
+end)
+
+-- Fix "semua app/browser logout" pas pindah sesi Hyprland <-> Plasma.
+-- Akar masalahnya: org.freedesktop.secrets (secret service yang dipakai
+-- Brave/Chrome/dll buat nyimpen cookie/token login terenkripsi) dipegang
+-- KDE punya ksecretd, yang butuh sinyal "unlock pakai password login tadi"
+-- dari pam_kwallet_init. PAM-nya (/etc/pam.d/login, via pam_kwallet5.so)
+-- CUMA nyiapin password-nya, gak otomatis manggil pam_kwallet_init sendiri.
+-- Di sesi Plasma, pam_kwallet_init ke-trigger otomatis lewat XDG autostart
+-- (Plasma emang proses semua .desktop di autostart/) — tapi Hyprland gak
+-- proses XDG autostart sama sekali, jadi hook-nya kelewat, ksecretd gak
+-- pernah ke-unlock, dan tiap sesi Hyprland baru dapet secrets kosong/beda
+-- → app & browser yang nyimpen sesi login-nya lewat secret service ini
+-- keliatan "logout" pas ganti sesi.
+hl.on("hyprland.start", function()
+    hl.exec_cmd("@KWALLET_PAM_INIT@")
+end)
+
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -55,6 +83,19 @@ local menu        = "hyprlauncher"
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+
+-- Fix "Open With" dialog Dolphin/KDE kosong pas jalan di Hyprland.
+-- Hyprland default nge-export XDG_MENU_PREFIX="hyprland-" ke systemd user
+-- env, tapi gak ada distro package yang nyediain
+-- /etc/xdg/menus/hyprland-applications.menu, jadi kbuildsycoca6 (dipicu
+-- kactivitymanagerd) gagal build menu app-nya → KOpenWithDialog Dolphin
+-- nongol kosong. File .menu generic-nya udah ditulis sendiri (gak pinjam
+-- punya Plasma) di modules/desktop/hyprland.nix — hl.env di sini cuma
+-- mastiin Hyprland tetap export "hyprland-" (defaultnya emang udah itu,
+-- baris ini dibuat eksplisit biar gak bergantung ke default yang bisa
+-- berubah di versi Hyprland berikutnya).
+-- Referensi: https://github.com/hyprwm/Hyprland/discussions/13984
+hl.env("XDG_MENU_PREFIX", "hyprland-")
 
 
 -----------------------
@@ -138,7 +179,7 @@ hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}
 hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
 
 -- Default springs
-hl.curve("easy",           { type = "spring", mass = 1, stiffness = 238.1191, damping = 24.21279333 })
+hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
 
 hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
 hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
@@ -226,7 +267,12 @@ hl.config({
         sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
-            natural_scroll = false,
+            -- Kalau arah scroll kerasa kebalik, ini yang ngatur.
+            -- true  = "natural scroll" (geser 2 jari ke atas → konten ikut
+            --          ke atas, kayak nge-scroll touchscreen/macOS/GNOME).
+            -- false = arah tradisional mouse wheel (2 jari ke atas →
+            --          konten geser ke bawah).
+            natural_scroll = true,
         },
     },
 })
