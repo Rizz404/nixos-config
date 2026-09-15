@@ -36,4 +36,10 @@
     # (gak ada bedanya buat sesi Plasma), Hyprland sekarang ikut dapet.
     "org.freedesktop.impl.portal.Secret" = [ "kwallet" ];
   };
+
+  xdg.configFile."hypr/peek-desktop.sh" = {
+    source = ./peek-desktop.sh;
+    executable = true;
+  };
+
 }

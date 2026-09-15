@@ -304,8 +304,8 @@ hl.gesture({
 -- * Beberapa udah self explanatory
 hl.bind("CTRL + ALT + T", hl.dsp.exec_cmd(terminal))
 hl.bind("ALT + F4", hl.dsp.window.close())
-hl.bind("SUPER + M", hl.dsp.workspace.toggle_special("peek"))
-hl.bind("SUPER + SHIFT + M", hl.dsp.workspace.toggle_special("peek"))
+hl.bind("SUPER + M", hl.dsp.exec_cmd("~/.config/hypr/peek-desktop.sh"))
+hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd("~/.config/hypr/peek-desktop.sh"))
 hl.bind("SUPER + E", hl.dsp.exec_cmd(fileManager))
 hl.bind("F11", hl.dsp.window.fullscreen({
     action = "toggle"
@@ -460,9 +460,9 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name = "auto-fullscreen",
+    name = "auto-maximize",
     match = {
-        class = "^(?!dev\\.noctalia\\.Noctalia$).*$"
+        class = "^(?!dev\\.noctalia\\.Noctalia$|hyprland-run$).*$"
     },
-    fullscreen = true
+    maximize = true
 })
