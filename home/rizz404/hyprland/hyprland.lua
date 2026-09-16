@@ -304,6 +304,7 @@ hl.gesture({
 -- * Beberapa udah self explanatory
 hl.bind("CTRL + ALT + T", hl.dsp.exec_cmd(terminal))
 hl.bind("ALT + F4", hl.dsp.window.close())
+hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + M", hl.dsp.exec_cmd("~/.config/hypr/peek-desktop.sh"))
 hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd("~/.config/hypr/peek-desktop.sh"))
 hl.bind("SUPER + E", hl.dsp.exec_cmd(fileManager))
