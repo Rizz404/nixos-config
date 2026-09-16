@@ -84,6 +84,34 @@ hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), {
     mouse = true
 })
 
+-- * Live-resize gaps tanpa reload config
+local default_gaps_out = tonumber(hl.get_config("general.gaps_out")) or 8
+local default_gaps_in = tonumber(hl.get_config("general.gaps_in")) or 4
+
+local function resize_gaps(step)
+    return function()
+        local gaps_out = tonumber(hl.get_config("general.gaps_out")) or default_gaps_out
+        local gaps_in = tonumber(hl.get_config("general.gaps_in")) or default_gaps_in
+        hl.config({
+            general = {
+                gaps_out = math.max(0, math.floor(gaps_out + step)),
+                gaps_in = math.max(0, math.floor(gaps_in + step / 2))
+            }
+        })
+    end
+end
+
+hl.bind("CTRL + SUPER + equal", resize_gaps(4))
+hl.bind("CTRL + SUPER + minus", resize_gaps(-4))
+hl.bind("CTRL + SUPER + G", function()
+    hl.config({
+        general = {
+            gaps_out = default_gaps_out,
+            gaps_in = default_gaps_in
+        }
+    })
+end)
+
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), {
     locked = true,
