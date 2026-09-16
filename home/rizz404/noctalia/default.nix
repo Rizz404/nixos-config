@@ -1,4 +1,7 @@
-{ ... }:
+{ config, ... }:
+let
+  idleDimScript = "${config.home.homeDirectory}/.config/noctalia/idle-dim.sh";
+in
 {
   programs.noctalia = {
     enable = true;
@@ -25,6 +28,33 @@
         source = "builtin";
         builtin = "Catppuccin";
       };
+
+      # Idle SENGAJA gak pernah suspend/sleep otomatis — cuma dim brightness.
+      # Suspend cuma kejadian kalau user sengaja mencet tombol power fisik
+      # (lihat hosts/<host>/configuration.nix -> services.logind.settings).
+      #
+      # Timeout beda pas charge vs pakai baterai disimulasikan dengan DUA
+      # behavior yang jalan paralel, masing-masing self-check status charging
+      # lewat idle-dim.sh dan no-op kalau gak nyambung sama kondisi aktual.
+      idle = {
+        pre_action_fade_seconds = 0;
+        behavior = {
+          dim-ac = {
+            enabled = true;
+            timeout = 600; # 10 menit, saat di-charge
+            action = "command";
+            command = "${idleDimScript} ac dim";
+            resume_command = "${idleDimScript} ac resume";
+          };
+          dim-battery = {
+            enabled = true;
+            timeout = 300; # 5 menit, saat pakai baterai
+            action = "command";
+            command = "${idleDimScript} battery dim";
+            resume_command = "${idleDimScript} battery resume";
+          };
+        };
+      };
     };
   };
 
@@ -34,5 +64,10 @@
     "hypr/modules/noctalia/autostart.lua".source = ./modules/autostart.lua;
     "hypr/modules/noctalia/keybindings.lua".source = ./modules/keybindings.lua;
     "hypr/modules/noctalia/rules.lua".source = ./modules/rules.lua;
+
+    "noctalia/idle-dim.sh" = {
+      source = ./idle-dim.sh;
+      executable = true;
+    };
   };
 }

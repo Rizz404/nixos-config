@@ -70,6 +70,12 @@
   networking.hostName = "dell-latitude-e7450-personal";
   networking.networkmanager.enable = true;
 
+  # Tombol power fisik = suspend (default systemd sebenarnya "poweroff").
+  # Idle otomatis TIDAK PERNAH suspend (lihat home/rizz404/noctalia/default.nix
+  # -> settings.idle) — suspend cuma kejadian kalau user sengaja mencet
+  # tombol power.
+  services.logind.settings.Login.HandlePowerKey = "suspend";
+
   time.timeZone = "Asia/Jakarta";
   i18n.defaultLocale = "en_US.UTF-8";
 
