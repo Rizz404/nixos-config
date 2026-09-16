@@ -10,9 +10,29 @@ in
 
     settings = {
       theme = {
-        mode = "dark";
-        source = "builtin";
+        mode = "auto";
+        shell_mode = "auto";
+        source = "wallpaper";
         builtin = "Catppuccin";
+        community_palette = "Oxocarbon";
+        wallpaper_scheme = "m3-tonal-spot";
+        templates = {
+          enable_builtin_templates = true;
+          builtin_ids = [ "hyprland" ];
+        };
+      };
+
+      location = {
+        auto_locate = true;
+      };
+
+      wallpaper = {
+        directory = "~/Pictures/Wallpapers";
+        transition = [ "wipe" ];
+        automation = {
+          enabled = true;
+          interval_seconds = 3600;
+        };
       };
 
       idle = {
@@ -57,6 +77,7 @@ in
     "hypr/modules/noctalia/autostart.lua".source = ./modules/autostart.lua;
     "hypr/modules/noctalia/keybindings.lua".source = ./modules/keybindings.lua;
     "hypr/modules/noctalia/rules.lua".source = ./modules/rules.lua;
+    "hypr/modules/noctalia/theme.lua".source = ./modules/theme.lua;
 
     "noctalia/idle-power.sh" = {
       source = ./idle-power.sh;

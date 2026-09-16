@@ -9,3 +9,4 @@
 require("modules.noctalia.autostart")
 require("modules.noctalia.keybindings")
 require("modules.noctalia.rules")
+require("modules.noctalia.theme")
