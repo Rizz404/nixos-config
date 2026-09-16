@@ -5,15 +5,7 @@
     xwayland.enable = true;
     package = null; # paket sudah disediakan system-wide lewat modules/desktop/hyprland.nix
     configType = "lua";
-    # Placeholder @KWALLET_PAM_INIT@ di hyprland.lua diganti path binary
-    # pam_kwallet_init yang asli (buat auto-unlock KWallet/ksecretd, lihat
-    # komentar di hyprland.lua bagian AUTOSTART). Ditulis begini (bukan
-    # hardcode path store-nya) biar tetap valid walau hash-nya berubah pas
-    # kwallet-pam ke-update.
-    extraConfig = builtins.replaceStrings
-      [ "@KWALLET_PAM_INIT@" ]
-      [ "${pkgs.kdePackages.kwallet-pam}/libexec/pam_kwallet_init" ]
-      (builtins.readFile ./hyprland.lua);
+    extraConfig = builtins.readFile ./hyprland.lua;
   };
   xdg.portal.config.common = {
     default = "*";
@@ -37,9 +29,33 @@
     "org.freedesktop.impl.portal.Secret" = [ "kwallet" ];
   };
 
-  xdg.configFile."hypr/peek-desktop.sh" = {
-    source = ./peek-desktop.sh;
-    executable = true;
+  xdg.configFile = {
+    "hypr/peek-desktop.sh" = {
+      source = ./peek-desktop.sh;
+      executable = true;
+    };
+
+    "hypr/modules/hyprland/monitors.lua".source = ./modules/monitors.lua;
+    "hypr/modules/hyprland/programs.lua".source = ./modules/programs.lua;
+
+    # Placeholder @KWALLET_PAM_INIT@ diganti path binary pam_kwallet_init
+    # yang asli (buat auto-unlock KWallet/ksecretd, lihat komentar di
+    # modules/autostart.lua). Ditulis begini (bukan hardcode path store-nya)
+    # biar tetap valid walau hash-nya berubah pas kwallet-pam ke-update.
+    "hypr/modules/hyprland/autostart.lua".text = builtins.replaceStrings
+      [ "@KWALLET_PAM_INIT@" ]
+      [ "${pkgs.kdePackages.kwallet-pam}/libexec/pam_kwallet_init" ]
+      (builtins.readFile ./modules/autostart.lua);
+
+    "hypr/modules/hyprland/environment.lua".source = ./modules/environment.lua;
+    "hypr/modules/hyprland/permissions.lua".source = ./modules/permissions.lua;
+    "hypr/modules/hyprland/appearance.lua".source = ./modules/appearance.lua;
+    "hypr/modules/hyprland/animations.lua".source = ./modules/animations.lua;
+    "hypr/modules/hyprland/layout.lua".source = ./modules/layout.lua;
+    "hypr/modules/hyprland/misc.lua".source = ./modules/misc.lua;
+    "hypr/modules/hyprland/input.lua".source = ./modules/input.lua;
+    "hypr/modules/hyprland/keybindings.lua".source = ./modules/keybindings.lua;
+    "hypr/modules/hyprland/windowrules.lua".source = ./modules/windowrules.lua;
   };
 
 }
