@@ -18,7 +18,12 @@ in
         wallpaper_scheme = "m3-tonal-spot";
         templates = {
           enable_builtin_templates = true;
-          builtin_ids = [ "hyprland" ];
+          # hyprland = border window, wezterm = terminal, gtk3/gtk4/qt = app non-KDE,
+          # kcolorscheme = Dolphin & app KDE lain
+          builtin_ids = [ "hyprland" "wezterm" "gtk3" "gtk4" "qt" "kcolorscheme" ];
+
+          enable_community_templates = true;
+          community_ids = [ "brave" "vscode" ];
         };
       };
 

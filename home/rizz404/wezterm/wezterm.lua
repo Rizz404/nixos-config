@@ -32,7 +32,19 @@ config.cursor_blink_ease_out = 'Constant'
 -- Menyembunyikan tab bar secara dinamis jika tidak ada tab sekunder yang aktif
 config.hide_tab_bar_if_only_one_tab = true
 
+-- Transparansi window biar wallpaper keliatan nembus (Hyprland blur udah aktif di
+-- decoration.blur, otomatis nge-blur belakang window ini juga)
+config.window_background_opacity = 0.85
+
+-- Scrollbar tipis di kanan, aktif kalau ada scrollback
+config.enable_scroll_bar = true
+
 -- Menghapus dekorasi jendela bawaan (title bar) namun mempertahankan fungsionalitas resize
 -- config.window_decorations = 'RESIZE'
+
+-- * Noctalia nulis skema warna ke ~/.config/wezterm/colors/Noctalia.toml tiap tema berubah
+--   (lihat docs/noctalia-ricing-guide.md section 8). wezterm.lua ini symlink read-only ke Nix
+--   store jadi auto-insert-nya Noctalia gagal nulis - baris ini ditambahin manual sebagai gantinya.
+config.color_scheme = 'Noctalia'
 
 return config
