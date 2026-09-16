@@ -11,3 +11,8 @@ hl.bind("Print", hl.dsp.exec_cmd(ipc .. "screenshot-fullscreen"))
 hl.bind("SUPER + Print", hl.dsp.exec_cmd(ipc .. "screenshot-region"))
 hl.bind("SUPER + SHIFT + Print", hl.dsp.exec_cmd(ipc .. "screenshot-annotate"))
 hl.bind("SUPER + V", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
+hl.bind("SUPER + W", hl.dsp.exec_cmd(ipc .. "wallpaper-next"))
+hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd(ipc .. "wallpaper-previous"))
+hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd(ipc .. "wallpaper-random"))
+hl.bind("SUPER + CTRL + W",
+    hl.dsp.exec_cmd([[sh -c 'noctalia msg notification-show "Wallpaper" "$(noctalia msg wallpaper-get)"']]))
