@@ -17,6 +17,9 @@
   networking.hostName = "lenovo-thinkpad-t14-personal";
   networking.networkmanager.enable = true;
 
+  # * Power button buat sleep saat aktif bukan langsung poweroff
+  services.logind.settings.Login.HandlePowerKey = "suspend";
+
   time.timeZone = "Asia/Jakarta";
   i18n.defaultLocale = "en_US.UTF-8";
 
