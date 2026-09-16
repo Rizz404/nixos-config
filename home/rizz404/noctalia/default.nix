@@ -23,12 +23,22 @@ in
           builtin_ids = [ "hyprland" "wezterm" "gtk3" "gtk4" "qt" "kcolorscheme" ];
 
           enable_community_templates = true;
-          community_ids = [ "brave" "vscode" ];
+          # vscode sengaja gak dipakai - settings.json-nya di-sync ke perangkat non-Linux juga
+          community_ids = [ "brave" ];
         };
       };
 
       location = {
         auto_locate = true;
+      };
+
+      # * Workaround bug casing di template kcolorscheme Noctalia: dia nulis
+      #   "ColorScheme=Noctalia" ke kdeglobals tapi scheme yang ke-generate
+      #   namanya "noctalia" (huruf kecil), jadi KDE apps (Dolphin dkk) gagal
+      #   nemuin schemenya & fallback ke default. colors_changed fire tiap
+      #   palette regenerate (termasuk auto wallpaper rotation), jadi dikoreksi lagi di sini.
+      hooks = {
+        colors_changed = "plasma-apply-colorscheme noctalia";
       };
 
       wallpaper = {

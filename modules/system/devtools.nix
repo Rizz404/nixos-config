@@ -78,7 +78,8 @@
     # programming language
     php
     php.packages.composer
-    python3
+    # * withPackages pillow - dibutuhin script theming Brave-nya Noctalia buat proses gambar
+    (python3.withPackages (ps: [ ps.pillow ]))
     jdk25
     nodejs
     go
