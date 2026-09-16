@@ -35,6 +35,55 @@ in
         };
       };
 
+      # Bar "4 pulau" (capsule_group) - lihat docs/noctalia-ricing-guide.md section 3
+      bar.default = {
+        position = "top";
+        enabled = true;
+        thickness = 32;
+        radius = 16;
+        margin_ends = 0;
+        margin_edge = 4;
+        # * 0 = gak nambah reserved space ekstra selain gaps_out Hyprland (appearance.lua),
+        #   biar window bisa mepet bar tanpa dead-space dobel
+        margin_opposite_edge = 0;
+        background_opacity = 0.0;
+        capsule = true;
+        capsule_opacity = 0.55;
+
+        start = [ "group:nav" ];
+        center = [ "clock" ];
+        end = [ "group:media" "group:sys" ];
+
+        capsule_group = [
+          {
+            id = "nav";
+            members = [ "launcher" "workspaces" ];
+            fill = "surface_variant";
+            opacity = 0.55;
+          }
+          {
+            id = "media";
+            members = [ "media" "notifications" ];
+            fill = "surface_variant";
+            opacity = 0.55;
+          }
+          {
+            id = "sys";
+            members = [ "network" "bluetooth" "volume" "battery" "control-center" ];
+            fill = "primary";
+            foreground = "on_primary";
+            # * Dinaikin dari 0.55 - di opacity rendah, teks "on_primary" gampang ilang
+            #   kontrasnya kalau primary hasil generate wallpaper kebetulan gelap/terang ekstrem
+            opacity = 0.85;
+          }
+        ];
+      };
+
+      widget.clock = {
+        format = "{:%H:%M} · {:%a, %d %b}";
+        tooltip_format = "{:%A, %d %B %Y}";
+      };
+
       idle = {
         pre_action_fade_seconds = 0;
         behavior = {
