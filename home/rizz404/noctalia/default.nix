@@ -29,4 +29,10 @@
   };
 
   wayland.windowManager.hyprland.extraConfig = builtins.readFile ./noctalia.lua;
+
+  xdg.configFile = {
+    "hypr/modules/noctalia/autostart.lua".source = ./modules/autostart.lua;
+    "hypr/modules/noctalia/keybindings.lua".source = ./modules/keybindings.lua;
+    "hypr/modules/noctalia/rules.lua".source = ./modules/rules.lua;
+  };
 }
