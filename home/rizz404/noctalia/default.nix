@@ -9,6 +9,10 @@ in
     systemd.enable = false;
 
     settings = {
+      shell = {
+        font_family = "Maple Mono NF";
+      };
+
       theme = {
         mode = "auto";
         shell_mode = "auto";

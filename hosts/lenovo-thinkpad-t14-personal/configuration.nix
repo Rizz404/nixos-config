@@ -36,5 +36,15 @@
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
 
+  # * Eksperimen: SDDM login theme + Quickshell lockscreen dari qylock
+  #   (~/qylock). theme = nama folder di https://github.com/Darkkal44/qylock/tree/main/themes
+  #   - ganti sesuka hati, banyak preview di README-nya. Di-comment dulu (butuh nixpkgs
+  #   unstable terpisah yang lumayan besar buat di-download, ditunda sampai ada
+  #   koneksi yang gak makan kuota) - lihat input `qylock` di flake.nix.
+  # programs.qylock = {
+  #   enable = true;
+  #   theme = "nier-automata";
+  # };
+
   system.stateVersion = "26.05";
 }
