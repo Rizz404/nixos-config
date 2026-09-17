@@ -301,8 +301,71 @@ Kalau suatu saat mau app lain yang belum ada built-in template-nya, ada juga jal
 
 ---
 
+## 11. Desktop widgets — home screen, bukan bar
+
+Ini sistem yang **beda dari widget bar** (Langkah 3): section `[desktop_widgets]` nge-render tiap
+widget sebagai layer-shell surface sendiri langsung di atas wallpaper (layer `Bottom`), bisa
+diposisikan bebas (bukan baris linear kayak bar) dan digeser lewat drag. Ini yang biasanya bikin
+home screen showcase spotlight keliatan "berisi" walau bar-nya sendiri udah minimal.
+
+### 11.1. Aktifin & tipe widget yang tersedia
+
+```toml
+[desktop_widgets]
+enabled = true
+```
+
+Tipe yang ada: `clock`, `weather`, `calendar`, `media_player`, `sysmon`, `audio_visualizer`,
+`fancy_audio_visualizer`, `volume`, `button`, `sticker`, `label`. Tiap widget didefinisikan di
+tabel bernama `[desktop_widgets.widget.<id>]` dengan field posisi/ukuran (`output`, `cx`, `cy`,
+`box_width`, `box_height`, `rotation`) plus `[desktop_widgets.widget.<id>.settings]` buat setting
+spesifik tipenya. Semua tipe dukung background rounded-rect opsional (`background_color` pakai
+role biar ikut palette, sama kayak `capsule_fill` di bar).
+
+Prasyarat beberapa tipe: `weather` butuh `[weather].enabled = true` (koordinat dari `[location]`,
+lihat Langkah 1 soal `auto_locate`), `calendar` butuh `[calendar].enabled = true` + akun kalender,
+`media_player`/`volume`/`audio_visualizer`/`fancy_audio_visualizer` butuh PipeWire aktif.
+
+### 11.2. Alur kerja: GUI dulu, baru promote ke Nix
+
+Sama persis pola di Langkah 0 — posisi (`cx`/`cy`) gak realistis ditebak manual, jadi:
+
+1. Nyalain `desktop_widgets.enabled = true` doang dulu di `default.nix` (gak perlu declare widget
+   individualnya).
+2. Masuk **edit mode**: `Settings → Desktop → Toggle Editor`, atau IPC
+   `noctalia msg desktop-widgets-edit`. Pindah ke workspace kosong (gak ketutup window) biar
+   overlay editornya keliatan.
+3. Tambah widget & drag posisinya langsung di layar (drag body = pindah, drag ring luar = rotate,
+   drag corner handle = resize, `G` = toggle snap grid). Hasilnya otomatis ke-tulis ke
+   `settings.toml` (runtime, gak nyentuh Nix).
+4. Kalau layoutnya udah pas: **Settings → Export Config → Merged User Config** buat narik hasil
+   gabungan (`config.toml` + `settings.toml`) jadi satu file, lalu pindahin blok
+   `[desktop_widgets.widget.*]` yang relevan ke `programs.noctalia.settings.desktop_widgets` di
+   `default.nix` — kalau enggak, layout cuma hidup di `settings.toml` dan gak ke-track Git (sama
+   risiko kayak yang disebut di Langkah 0).
+
+### 11.3. Rekomendasi kombinasi buat look minimal-tapi-nge-pop
+
+Gak semua tipe perlu dipakai sekaligus — pilih 2-4 yang beneran kepake, biar gak jadi ramai kayak
+desktop widget engine lawas (Conky-style). Kombinasi yang umum dipakai di showcase spotlight:
+
+- **`clock`** sebagai centerpiece (besar, `clock_style = "analog"` buat kesan artsy, atau
+  `"digital"` simpel) — diposisikan di area kosong wallpaper, bukan numpuk sama clock kecil di bar.
+- **`sysmon`** kecil di pojok (`display = "gauge"` lebih compact daripada `"graph"`) — aksen
+  "minimal-tech" tanpa makan banyak ruang visual.
+- **`media_player`** dengan `hide_when_no_media = true` — nongol otomatis pas lagi muter musik,
+  ilang total pas idle, jadi gak pernah kerasa "bolong" waktu gak dipake.
+- **`weather`** kecil kalau udah nyalain `[weather].enabled` — pasangan alami sama `clock` di
+  pojok yang sama.
+
+Hindari pasang banyak `sticker`/`label`/`button` sekaligus di 1 layar kalau targetnya "minimal" —
+tipe-tipe itu lebih cocok buat 1-2 aksen, bukan pengganti dock/launcher beneran.
+
+---
+
 *Sumber: `example.toml`, `nix/home-module.nix`, dan `docs/user/**` dari source
 `github:noctalia-dev/noctalia` rev `4a92d27dadb32c4bcc9c1cb14eb808a3a0bb0a93` (input flake
 `noctalia` di `flake.lock`); `assets/templates/hyprland/*` dan `assets/templates/builtin.toml`
-dari source yang sama; file hasil build `~/.config/hypr/hyprland.lua` (resolved ke
-`hm_hyprhyprland.lua` di Nix store) buat verifikasi urutan eksekusi aktual di Langkah 7.2.*
+dari source yang sama; `docs/user/desktop/widgets.mdx` dari source yang sama buat detail Langkah
+11; file hasil build `~/.config/hypr/hyprland.lua` (resolved ke `hm_hyprhyprland.lua` di Nix
+store) buat verifikasi urutan eksekusi aktual di Langkah 7.2.*

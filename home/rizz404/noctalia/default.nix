@@ -129,6 +129,15 @@ in
         tooltip_format = "{:%A, %d %B %Y}";
       };
 
+      # Desktop widgets - lihat docs/noctalia-ricing-guide.md section 11.
+      # Widget individualnya sengaja gak dideklarasi di sini - posisinya (cx/cy) cuma
+      # bisa ditentuin dengan bener lewat edit mode (Settings -> Desktop -> Toggle
+      # Editor), yang nulis ke settings.toml. Baru promote ke sini kalau udah final
+      # (Settings -> Export Config -> Merged User Config).
+      desktop_widgets = {
+        enabled = true;
+      };
+
       # Dock - lihat docs/noctalia-ricing-guide.md section 4
       # dock = {
       #   enabled = true;
