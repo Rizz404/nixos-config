@@ -5,11 +5,6 @@ hl.bind("ALT + Space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
 hl.bind("SUPER + N", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center"))
 hl.bind("SUPER + comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd(ipc .. "session lock"))
--- * Eksperimen qylock (Quickshell lockscreen custom) - lihat programs.qylock di
---   hosts/lenovo-thinkpad-t14-personal/configuration.nix. Sengaja bind terpisah,
---   bukan gantiin SUPER+L, biar lock Noctalia yang biasa tetap jalan normal.
---   Di-comment sampai programs.qylock di-enable lagi (package qylock-lock belum keinstall).
--- hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("qylock-lock"))
 hl.bind("ALT + Tab", hl.dsp.exec_cmd(ipc .. "window-switcher"))
 hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd(ipc .. "panel-toggle session"))
 hl.bind("Print", hl.dsp.exec_cmd(ipc .. "screenshot-fullscreen"))

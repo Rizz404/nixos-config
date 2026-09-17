@@ -1,6 +1,7 @@
 { config, ... }:
 let
   idlePowerScript = "${config.home.homeDirectory}/.config/noctalia/idle-power.sh";
+  onColorsChangedScript = "${config.home.homeDirectory}/.config/noctalia/on-colors-changed.sh";
 in
 {
   programs.noctalia = {
@@ -29,6 +30,13 @@ in
           enable_community_templates = true;
           # vscode sengaja gak dipakai - settings.json-nya di-sync ke perangkat non-Linux juga
           community_ids = [ "brave" ];
+
+          # * Template custom buat theme SDDM noctalia-sync - lihat
+          #   ~/qylock/themes/noctalia-sync/Main.qml (loadNoctaliaColors()).
+          user.qylock-colors = {
+            input_path = "${config.home.homeDirectory}/.config/noctalia/templates/qylock-colors.json.tmpl";
+            output_path = "${config.home.homeDirectory}/.config/qylock/colors.json";
+          };
         };
       };
 
@@ -36,17 +44,31 @@ in
         enabled = true;
       };
 
+      # * Lockscreen native Noctalia - wallpaper & warna otomatis ikut wallpaper aktif
+      #   ("wallpaper" field dikosongin = pakai desktop wallpaper), gak butuh plumbing
+      #   custom kayak percobaan qylock kemarin.
+      #   blurred_desktop = false (bukan live screenshot) biar konsisten sama login
+      #   screen (~/qylock/themes/noctalia-sync) - itu cuma bisa akses wallpaper file,
+      #   gak bisa screenshot desktop yang belum ada sesinya.
+      lockscreen = {
+        enabled = true;
+        blurred_desktop = false;
+        blur_intensity = 0.6;
+        tint_intensity = 0.35;
+      };
+
       location = {
         auto_locate = true;
       };
 
-      # * Workaround bug casing di template kcolorscheme Noctalia: dia nulis
-      #   "ColorScheme=Noctalia" ke kdeglobals tapi scheme yang ke-generate
-      #   namanya "noctalia" (huruf kecil), jadi KDE apps (Dolphin dkk) gagal
-      #   nemuin schemenya & fallback ke default. colors_changed fire tiap
-      #   palette regenerate (termasuk auto wallpaper rotation), jadi dikoreksi lagi di sini.
+      # * colors_changed fire tiap palette regenerate (termasuk auto wallpaper
+      #   rotation) - dipakai buat 2 hal, lihat on-colors-changed.sh: (1) koreksi
+      #   bug casing template kcolorscheme Noctalia (nulis "ColorScheme=Noctalia"
+      #   tapi scheme yang ke-generate namanya "noctalia" huruf kecil, bikin KDE
+      #   apps fallback ke default), dan (2) ekspor path wallpaper aktif buat
+      #   login screen custom (~/qylock/themes/noctalia-sync).
       hooks = {
-        colors_changed = "plasma-apply-colorscheme noctalia";
+        colors_changed = onColorsChangedScript;
       };
 
       wallpaper = {
@@ -205,5 +227,12 @@ in
       source = ./idle-power.sh;
       executable = true;
     };
+
+    "noctalia/on-colors-changed.sh" = {
+      source = ./on-colors-changed.sh;
+      executable = true;
+    };
+
+    "noctalia/templates/qylock-colors.json.tmpl".source = ./qylock-colors.json.tmpl;
   };
 }

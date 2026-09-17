@@ -220,17 +220,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1789360700,
-        "narHash": "sha256-ELHBl+9ueNJhoNYRioSIHb/K7f+SNsesG/+X5ijA+NA=",
-        "owner": "Darkkal44",
-        "repo": "qylock",
-        "rev": "f6561e2ceae33f26e5e660742a5df2f725cbe514",
-        "type": "github"
+        "lastModified": 1789632393,
+        "narHash": "sha256-zx2KkcnEy9LyQ/4vfmLLJ/a7tAjN+SxfHn6q53GHIa0=",
+        "path": "/home/rizz404/qylock",
+        "type": "path"
       },
       "original": {
-        "owner": "Darkkal44",
-        "repo": "qylock",
-        "type": "github"
+        "path": "/home/rizz404/qylock",
+        "type": "path"
       }
     },
     "root": {

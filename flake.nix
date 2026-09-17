@@ -20,7 +20,10 @@
     noctalia.url = "github:noctalia-dev/noctalia";
 
     qylock = {
-      url = "github:Darkkal44/qylock";
+      # * Mode dev: pakai clone lokal biar tiap edit QML langsung kepake tanpa
+      #   push ke GitHub dulu. Balikin ke "github:Darkkal44/qylock" (atau fork sendiri)
+      #   begitu udah puas - path: cuma jalan di mesin yang punya foldernya.
+      url = "path:/home/rizz404/qylock";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
