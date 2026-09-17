@@ -10,4 +10,8 @@ hl.env("XDG_MENU_PREFIX", "hyprland-")
 
 -- * Tanpa ini, app KDE (Dolphin dkk) gak load plugin KDEPlasmaPlatformTheme6,
 --   jadi gak masuk jalur yang baca AccentColor/ColorScheme buat recolor icon dinamis
-hl.env("QT_QPA_PLATFORMTHEME", "kde6")
+-- * Dicomment sementara (2026-09-16): diduga jadi penyebab UI dialog extract
+--   Dolphin/Ark ke-corrupt (Options panel numpuk, tombol Extract gak kepencet).
+--   Plugin KDEPlasmaPlatformTheme6 diduga punya popup-repaint bug di Hyprland.
+--   Test: uncomment lagi kalau home-manager switch abis ini bug-nya ilang.
+-- hl.env("QT_QPA_PLATFORMTHEME", "kde6")
