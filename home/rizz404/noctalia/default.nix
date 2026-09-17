@@ -32,6 +32,10 @@ in
         };
       };
 
+      nightlight = {
+        enabled = true;
+      };
+
       location = {
         auto_locate = true;
       };
@@ -88,7 +92,7 @@ in
           }
           {
             id = "sys";
-            members = [ "network" "bluetooth" "volume" "battery" "control-center" ];
+            members = [ "network" "bluetooth" "volume" "battery" "tray" "control-center" ];
             fill = "primary";
             foreground = "on_primary";
             # * Dinaikin dari 0.55 - di opacity rendah, teks "on_primary" gampang ilang
@@ -151,6 +155,11 @@ in
       idle = {
         pre_action_fade_seconds = 0;
         behavior = {
+          lock = {
+            enabled = true;
+            timeout = 900; # 15 menit
+            action = "lock";
+          };
           dim-ac = {
             enabled = true;
             timeout = 300; # 5 menit, saat di-charge

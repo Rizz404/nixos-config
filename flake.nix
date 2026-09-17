@@ -19,7 +19,10 @@
 
     noctalia.url = "github:noctalia-dev/noctalia";
 
-    qylock.url = "github:Darkkal44/qylock";
+    qylock = {
+      url = "github:Darkkal44/qylock";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, nix-cachyos-kernel, ... }@inputs:
