@@ -19,9 +19,7 @@
 
     noctalia.url = "github:noctalia-dev/noctalia";
 
-    # Eksperimen SDDM/Quickshell lockscreen themes - lihat hosts/lenovo-thinkpad-t14-personal
-    # Di-comment dulu, nixpkgs unstable-nya sendiri berat buat di-download pakai kuota.
-    # qylock.url = "github:Darkkal44/qylock";
+    qylock.url = "github:Darkkal44/qylock";
   };
 
   outputs = { self, nixpkgs, home-manager, nix-cachyos-kernel, ... }@inputs:
@@ -87,7 +85,7 @@
           modules = [
             ./hosts/lenovo-thinkpad-t14-personal/configuration.nix
             ./modules/system/battery.nix
-            # inputs.qylock.nixosModules.default
+            inputs.qylock.nixosModules.default
           ] ++ sharedModules;
         };
       };
