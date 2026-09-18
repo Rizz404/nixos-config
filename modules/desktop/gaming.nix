@@ -5,6 +5,7 @@
     enable = true;
     remotePlay.openFirewall = true;       # kalau mau streaming ke device lain di jaringan
     dedicatedServer.openFirewall = false; # cuma perlu kalau mau host game server sendiri
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
   hardware.steam-hardware.enable = true;
 
