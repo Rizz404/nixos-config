@@ -69,6 +69,8 @@
     samba
     pdfarranger
     qpdf
+    file
+    gallery-dl
 
     # database and its tools
     pgcli
