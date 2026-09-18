@@ -4,8 +4,8 @@
 
   # biar nixos-rebuild gak cuma pakai 2 dari 12 thread yang ada, override swap.nix
   nix.settings = {
-    max-jobs = lib.mkForce 4;
-    cores = lib.mkForce 3;
+    max-jobs = lib.mkForce 2;
+    cores = lib.mkForce 10;
   };
 
   boot.loader.systemd-boot.enable = false;
