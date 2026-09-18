@@ -57,10 +57,28 @@ hl.window_rule({
 hl.window_rule({
     name = "auto-maximize",
     match = {
-        class = "^(?!dev\\.noctalia\\.Noctalia$|hyprland-run$).*$",
+        class = "^(?!dev\\.noctalia\\.Noctalia$|hyprland-run$|org\\.kde\\.dolphin$).*$",
         title = "^(?!.*wants to (open|save)).*$"
     },
     maximize = true
+})
+
+-- Dolphin (class org.kde.dolphin) sering ke-trigger buka bukan cuma dari
+-- SUPER+E manual, tapi juga dari app lain lewat aksi "show in file
+-- manager"/"open containing folder" (mis. dari Brave downloads, qBittorrent,
+-- AB Download Manager) yang shell out ke dolphin. Kalau instance itu kena
+-- "auto-maximize" di atas, window-nya kadang ngebug parah (gagal ke-render/
+-- gak bisa kebuka sama sekali) — diduga terkait bug repaint yang sama yang
+-- disebut di modules/hyprland/environment.lua soal Qt KDEPlasmaPlatformTheme6
+-- di Hyprland. Excluded dari auto-maximize di atas + di-float paksa di sini
+-- biar Dolphin selalu jadi window normal (resizable, gak dipaksa fullscreen)
+-- apapun yang men-trigger dia.
+hl.window_rule({
+    name = "float-dolphin",
+    match = {
+        class = "^(org\\.kde\\.dolphin)$"
+    },
+    float = true
 })
 
 -- Sebagian app render window-nya ke buffer ARGB yang punya alpha channel di
