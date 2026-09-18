@@ -2,6 +2,7 @@
 let
   idlePowerScript = "${config.home.homeDirectory}/.config/noctalia/idle-power.sh";
   onColorsChangedScript = "${config.home.homeDirectory}/.config/noctalia/on-colors-changed.sh";
+  stickerRandomScript = "${config.home.homeDirectory}/.config/noctalia/sticker-random.sh";
 in
 {
   programs.noctalia = {
@@ -69,6 +70,11 @@ in
       #   login screen custom (~/qylock/themes/noctalia-sync).
       hooks = {
         colors_changed = onColorsChangedScript;
+        # * wallpaper_changed fire tiap wallpaper aktif ganti - otomatis (wallpaper.automation
+        #   di bawah) maupun manual lewat keybinding SUPER+W/SHIFT+W/ALT+W (lihat
+        #   modules/keybindings.lua). sticker-random.sh milih 1 gambar random dari
+        #   ~/Pictures/Liked Images Square dan nimpa image_path widget sticker di desktop.
+        wallpaper_changed = stickerRandomScript;
       };
 
       wallpaper = {
@@ -239,6 +245,11 @@ in
 
     "noctalia/on-colors-changed.sh" = {
       source = ./on-colors-changed.sh;
+      executable = true;
+    };
+
+    "noctalia/sticker-random.sh" = {
+      source = ./sticker-random.sh;
       executable = true;
     };
 
