@@ -91,6 +91,7 @@
           modules = [
             ./hosts/lenovo-thinkpad-t14-personal/configuration.nix
             ./modules/system/battery.nix
+            ./modules/desktop/gaming.nix
             inputs.qylock.nixosModules.default
           ] ++ sharedModules;
         };
