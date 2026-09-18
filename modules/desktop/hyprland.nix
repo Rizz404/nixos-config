@@ -46,5 +46,6 @@
     kdePackages.kwallet
     kdePackages.kwallet-pam
     udiskie # * Auto-mount + notifikasi + kasih menu eject pada usb drive
+    xrdb    # * Set Xft.dpi biar app XWayland (steam, dll) gak kekecilan/blur di monitor scale 1.5 (lihat modules/hyprland/autostart.lua)
   ];
 }
