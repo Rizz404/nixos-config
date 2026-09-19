@@ -35,6 +35,7 @@
       # Modul bersama yang dipakai di semua host
       sharedModules = [
         ./modules/system/core.nix
+        ./modules/system/plymouth.nix
         ./modules/system/shell.nix
         ./modules/system/devtools.nix
         ./modules/system/network.nix
