@@ -2,6 +2,7 @@
 local ipc = "noctalia msg "
 
 hl.bind("ALT + Space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
+hl.bind("SUPER + Space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
 hl.bind("SUPER + N", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center"))
 hl.bind("SUPER + comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd(ipc .. "session lock"))

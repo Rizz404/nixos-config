@@ -13,6 +13,12 @@ in
     settings = {
       shell = {
         font_family = "Maple Mono NF";
+        # * Default (mru=false) urutin window ikut workspace/posisi, kerasa "acak"
+        # * pas alt-tab. mru=true bikin urutannya ikut window yang terakhir
+        # * dipakai duluan, kayak behavior Windows/KDE.
+        window_switcher = {
+          mru = true;
+        };
       };
 
       theme = {
