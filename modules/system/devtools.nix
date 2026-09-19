@@ -13,6 +13,7 @@
     rustdesk-flutter
     vscode
     telegram-desktop
+    mpvScripts.mpris
 
     # cli tools
     claude-code
