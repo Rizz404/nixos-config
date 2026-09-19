@@ -1,21 +1,26 @@
 #!/usr/bin/env bash
-# Dim/restore brightness ATAU screen off/on dari idle behavior Noctalia
+# Dim/restore brightness, screen off/on, ATAU lock dari idle behavior Noctalia
 # (lihat default.nix -> settings.idle.behavior).
 #
 # Noctalia gak punya kondisional bawaan buat "beda timeout kalau lagi
 # charge vs enggak" — cuma named behavior + timeout tetap per nama. Makanya
-# tiap mode (dim, screen-off) didefinisikan DUA behavior (varian -ac timeout
-# panjang, varian -battery timeout pendek) yang jalan berbarengan, tapi
-# masing-masing cek sendiri status charging saat itu lewat script ini dan
-# no-op kalau timernya "gak nyambung" sama kondisi aktual (misal varian
+# tiap mode (dim, screen-off, lock) didefinisikan DUA behavior (varian -ac
+# timeout panjang, varian -battery timeout pendek) yang jalan berbarengan,
+# tapi masing-masing cek sendiri status charging saat itu lewat script ini
+# dan no-op kalau timernya "gak nyambung" sama kondisi aktual (misal varian
 # battery keburu nyala pas laptop lagi di-charge -> dibiarin aja).
 #
 # screen-off dipakai lewat `noctalia msg dpms-*` (bukan native action
 # "screen_off") justru biar bisa di-gate per tier kayak di atas; efeknya
 # sama, cuma monitor mati, BUKAN suspend/sleep.
 #
+# lock juga lewat `noctalia msg session lock` (bukan native action "lock")
+# dengan alasan sama - biar timeout-nya beda antara AC & baterai. Gak ada
+# fase "resume" buat lock (unlock-nya lewat password di lockscreen, bukan
+# idle resume kayak dim/screen-off).
+#
 # $1 = tier yang mau dicek ("ac" atau "battery")
-# $2 = mode ("dim" atau "screen-off")
+# $2 = mode ("dim", "screen-off", atau "lock")
 # $3 = phase ("start" atau "resume")
 
 set -euo pipefail
@@ -67,5 +72,8 @@ case "$mode-$phase" in
         ;;
     screen-off-resume)
         noctalia msg dpms-on
+        ;;
+    lock-start)
+        noctalia msg session lock
         ;;
 esac
