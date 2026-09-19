@@ -14,7 +14,12 @@
     enable = true;
     efiInstallAsRemovable = true;
 
+    # * timeout: 0 cuma auto-pilih entry instan, UI Limine tetap sempat kerender
+    #   sekilas - quiet: yes nekan semua output layar Limine biar transisi ke
+    #   Plymouth bener-bener mulus tanpa flash.
     extraConfig = ''
+      quiet: yes
+
       /+CachyOS
         protocol: linux
         path: boot():/0bcb8e0c7ca746e8875dceb3f97bef01/linux-cachyos/vmlinuz
@@ -29,6 +34,11 @@
     "i915.enable_dc=0"
     "intel_idle.max_cstate=4"
   ];
+
+  # * Load i915 di initrd (early KMS) biar Plymouth langsung pakai driver asli
+  #   sejak awal, bukan simpledrm generik yang baru diganti i915 belakangan -
+  #   pergantian itu yang bikin layar blank sekilas.
+  boot.initrd.kernelModules = [ "i915" ];
 
   system.activationScripts.limineBootPolicy = {
     deps = [ "etc" ];

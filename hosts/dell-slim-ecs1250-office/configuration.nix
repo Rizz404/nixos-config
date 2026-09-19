@@ -6,6 +6,11 @@
 
   virtualisation.vmware.guest.enable = true;
 
+  # * Load vmwgfx di initrd (early KMS) biar Plymouth gak blank sekilas
+  #   sebelum driver display VMware kepasang - belum diverifikasi langsung
+  #   di mesin ini, cek `journalctl -b -1 | grep -i drm` kalau masih blank.
+  boot.initrd.kernelModules = [ "vmwgfx" ];
+
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;

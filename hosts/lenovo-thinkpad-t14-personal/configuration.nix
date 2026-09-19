@@ -13,6 +13,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0;
   boot.loader.limine.enable = true;
+  # * timeout: 0 cuma auto-pilih entry instan, UI Limine tetap sempat kerender
+  #   sekilas - quiet: yes nekan semua output layar Limine biar transisi ke
+  #   Plymouth bener-bener mulus tanpa flash.
+  boot.loader.limine.extraConfig = "quiet: yes\n";
+
+  # * Load amdgpu di initrd (early KMS) biar Plymouth langsung pakai driver asli
+  #   sejak awal, bukan simpledrm generik yang baru diganti amdgpu ~5 detik
+  #   setelah switch-root - pergantian itu yang bikin layar blank sekilas.
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
   networking.hostName = "lenovo-thinkpad-t14-personal";
   networking.networkmanager.enable = true;
