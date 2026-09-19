@@ -1,10 +1,14 @@
 ----------------
 ----  MISC  ----
 ----------------
+-- * Wallpaper Hyprland sendiri gak pernah keliatan (selalu ketutup layer
+-- * wallpaper Noctalia, lihat home/rizz404/noctalia/default.nix), tapi
+-- * dimatiin eksplisit di sini biar gak ada proses render/load sia-sia dan
+-- * gak ada kemungkinan sempet keliatan (mis. pas Noctalia belum start).
 hl.config({
     misc = {
-        force_default_wallpaper = -1, -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo = false -- If true disables the random hyprland logo / anime girl background. :(
+        force_default_wallpaper = 0, -- 0 atau 1 = disable anime mascot wallpaper (-1 = random, termasuk mascot)
+        disable_hyprland_logo = true -- Disable random hyprland logo / anime girl background
     }
 })
 

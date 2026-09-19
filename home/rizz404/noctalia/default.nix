@@ -21,7 +21,7 @@ in
         source = "wallpaper";
         builtin = "Catppuccin";
         community_palette = "Oxocarbon";
-        wallpaper_scheme = "m3-tonal-spot";
+        wallpaper_scheme = "m3-content";
         templates = {
           enable_builtin_templates = true;
           # * hyprland = border window, wezterm = terminal, gtk3/gtk4/qt = app non-KDE,
