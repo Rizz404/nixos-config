@@ -19,6 +19,10 @@ in
         window_switcher = {
           mru = true;
         };
+        screenshot = {
+          directory = "~/Pictures/Screenshots";
+          show_cursor = true;
+        };
       };
 
       theme = {
