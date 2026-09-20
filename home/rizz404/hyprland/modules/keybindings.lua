@@ -68,6 +68,9 @@ hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({
     workspace = "special:magic"
 }))
 
+-- * Rapetin workspace 1-10: tutup celah kosong
+hl.bind("SUPER + SHIFT + G", hl.dsp.exec_cmd("~/.config/hypr/compact-workspaces.sh"))
+
 -- Scroll through existing workspaces with "SUPER" + scroll
 hl.bind("SUPER + mouse_down", hl.dsp.focus({
     workspace = "e+1"

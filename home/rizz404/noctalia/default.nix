@@ -98,7 +98,7 @@ in
         capsule_group = [
           {
             id = "nav";
-            members = [ "launcher" "workspaces" ];
+            members = [ "launcher" "taskbar" ];
             fill = "surface_variant";
             opacity = 0.55;
           }
@@ -123,6 +123,37 @@ in
       widget.clock = {
         format = "{:%H:%M} · {:%a, %d %b}";
         tooltip_format = "{:%A, %d %B %Y}";
+      };
+
+      widget.taskbar = {
+        # * Fitur inti: kelompokin icon app per-workspace biar keliatan
+        # * app apa aja yang jalan di tiap workspace, bukan cuma pill kosong
+        group_by_workspace = true;
+        workspace_group_content = "icons";
+        group_single_icon_per_app = true; # * >1 window Discord di 1 workspace = 1 icon
+
+        # * Tetep kompak - cuma tampilin workspace yang ada isinya. 10 workspace
+        # * dari keybindings.lua gak bakal bikin taskbar selebar itu.
+        hide_empty_workspaces = true;
+        only_active_workspace = false; # * justru mau liat SEMUA workspace terisi
+
+        show_workspace_label = true;
+        workspace_label_placement = "corner";
+        workspace_group_capsule = true; # * border/bg per-grup biar batas antar-workspace jelas
+
+        show_all_outputs = false;
+        focused_output_only = false;
+
+        icon_scale = 0.9; # * dikit lebih kecil biar muat lebih banyak app
+        show_active_indicator = true;
+        active_indicator_color = "primary";
+        active_opacity = 1.0;
+        inactive_opacity = 0.75;
+
+        focused_color = "primary";
+        occupied_color = "on_surface";
+        empty_color = "outline";
+        urgent_color = "error";
       };
 
       # * Biar bisa pake widgets di desktop
@@ -150,11 +181,7 @@ in
 
       idle = {
         pre_action_fade_seconds = 0;
-        # * screenoff HARUS lebih lama dari lock, kalau kebalik layar udah mati
-        # * duluan pas lock trigger terus lockscreen kepaksa nyalain layar lagi
-        # * (dpms-on) buat nampilin prompt - kerasa "layar nyala lagi sendiri".
-        # * lock dipecah -ac/-battery (bukan native action "lock") biar timeout-nya
-        # * bisa beda kayak dim/screenoff.
+        # * Screenoff harus lebh lama daripada lockscreen, biar lockscreen gak nyalain layar lagi
         behavior = {
           dim-ac = {
             enabled = true;

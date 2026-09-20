@@ -35,6 +35,11 @@
       executable = true;
     };
 
+    "hypr/compact-workspaces.sh" = {
+      source = ./compact-workspaces.sh;
+      executable = true;
+    };
+
     "hypr/modules/hyprland/monitors.lua".source = ./modules/monitors.lua;
     "hypr/modules/hyprland/programs.lua".source = ./modules/programs.lua;
 
