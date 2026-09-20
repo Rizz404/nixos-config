@@ -89,45 +89,6 @@ hl.bind("SUPER + SHIFT + down", hl.dsp.window.resize({
     repeating = true
 })
 
--- Geser window floating dengan keyboard, SUPER + CTRL + SHIFT + arrow
--- * Dipakai buat mindahin window floating -- SUPER+drag (mouse:272 di bawah)
---   KELIHATANNYA ngegeser window floating pas ditahan, tapi begitu dilepas
---   di atas/deket window tiled, Hyprland nge-insert dia balik ke tiling
---   tree (dwindle drag-to-tile), bukan cuma numpuk keliatannya doang.
---   Dikonfirmasi langsung: mindahin lewat dispatcher (bukan mouse drag)
---   walopun ditumpuk PERSIS di atas window tiled tetap floating, gak
---   ke-insert -- makanya nudge keyboard ini yang reliable buat floating,
---   bukan drag mouse.
-local move_step = 40
-hl.bind("SUPER + CTRL + SHIFT + left", hl.dsp.window.move({
-    x = -move_step,
-    y = 0,
-    relative = true
-}), {
-    repeating = true
-})
-hl.bind("SUPER + CTRL + SHIFT + right", hl.dsp.window.move({
-    x = move_step,
-    y = 0,
-    relative = true
-}), {
-    repeating = true
-})
-hl.bind("SUPER + CTRL + SHIFT + up", hl.dsp.window.move({
-    x = 0,
-    y = -move_step,
-    relative = true
-}), {
-    repeating = true
-})
-hl.bind("SUPER + CTRL + SHIFT + down", hl.dsp.window.move({
-    x = 0,
-    y = move_step,
-    relative = true
-}), {
-    repeating = true
-})
-
 -- Tukar posisi window fokus dengan window di arah panah, SUPER + ALT + arrow
 -- * direction pakai kata penuh ("left"/"right"/dst), bukan singkatan l/r/u/d
 --   kayak classic swapwindow -- singkatan bikin dispatcher gak nemu window
@@ -190,9 +151,6 @@ hl.bind("SUPER + mouse_up", hl.dsp.focus({
 }))
 
 -- Move/resize windows with "SUPER" + LMB/RMB and dragging
--- * Buat window FLOATING, drag mouse (LMB) ini bisa ke-insert balik ke
---   tiling kalau dilepas di atas/deket window tiled -- lihat catatan di
---   SUPER+CTRL+SHIFT+arrow di atas buat cara yang reliable
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), {
     mouse = true
 })

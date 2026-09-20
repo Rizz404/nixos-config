@@ -58,8 +58,7 @@ hl.window_rule({
     name = "auto-maximize",
     match = {
         class = "^(?!dev\\.noctalia\\.Noctalia$|hyprland-run$|org\\.kde\\.dolphin$).*$",
-        title = "^(?!.*wants to (open|save)).*$",
-        float = false
+        title = "^(?!.*wants to (open|save)).*$"
     },
     maximize = true
 })
