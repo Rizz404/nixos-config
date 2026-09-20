@@ -40,6 +40,11 @@
       executable = true;
     };
 
+    "hypr/float-if-external.sh" = {
+      source = ./float-if-external.sh;
+      executable = true;
+    };
+
     "hypr/modules/hyprland/monitors.lua".source = ./modules/monitors.lua;
     "hypr/modules/hyprland/programs.lua".source = ./modules/programs.lua;
 

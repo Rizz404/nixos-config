@@ -70,16 +70,15 @@ hl.window_rule({
 -- "auto-maximize" di atas, window-nya kadang ngebug parah (gagal ke-render/
 -- gak bisa kebuka sama sekali) — diduga terkait bug repaint yang sama yang
 -- disebut di modules/hyprland/environment.lua soal Qt KDEPlasmaPlatformTheme6
--- di Hyprland. Excluded dari auto-maximize di atas + di-float paksa di sini
--- biar Dolphin selalu jadi window normal (resizable, gak dipaksa fullscreen)
--- apapun yang men-trigger dia.
-hl.window_rule({
-    name = "float-dolphin",
-    match = {
-        class = "^(org\\.kde\\.dolphin)$"
-    },
-    float = true
-})
+-- di Hyprland. Tetap excluded dari auto-maximize di atas apapun trigger-nya.
+--
+-- Float paksa buat instance yang ke-trigger dari app lain sekarang ditangani
+-- float-if-external.sh (reaktif, berdasar parent process) alih-alih static
+-- rule di sini, supaya Dolphin yang dibuka langsung (SUPER+E) tetap tiling
+-- normal. Kalau bug render di atas balik lagi khusus buat trigger eksternal
+-- (kemungkinan karena static rule di-apply sebelum render pertama, sedangkan
+-- script reaktif baru float SETELAH window sempat ke-tile), rule statis ini
+-- perlu ditambah lagi sebagai fallback.
 
 -- Sebagian app render window-nya ke buffer ARGB yang punya alpha channel di
 -- hampir semua piksel (antialiasing teks, rounded corner, shadow client-side)

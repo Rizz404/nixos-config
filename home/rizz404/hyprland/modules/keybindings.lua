@@ -36,6 +36,61 @@ hl.bind("SUPER + down", hl.dsp.focus({
     direction = "down"
 }))
 
+-- Resize focused window with SUPER + SHIFT + arrow keys
+-- * Cuma kerasa efeknya kalau ada window lain buat di-resize bareng di
+--   workspace yang sama (window tunggal yang udah fullscreen/maximize gak
+--   punya boundary buat digeser)
+-- * relative = true wajib ada -- tanpa itu x/y dibaca sebagai ukuran
+--   absolut (window bisa error "Invalid size" kalau x/y ke-set 0), bukan
+--   delta pixel kayak resizeactive classic
+local resize_step = 40
+hl.bind("SUPER + SHIFT + left", hl.dsp.window.resize({
+    x = -resize_step,
+    y = 0,
+    relative = true
+}), {
+    repeating = true
+})
+hl.bind("SUPER + SHIFT + right", hl.dsp.window.resize({
+    x = resize_step,
+    y = 0,
+    relative = true
+}), {
+    repeating = true
+})
+hl.bind("SUPER + SHIFT + up", hl.dsp.window.resize({
+    x = 0,
+    y = -resize_step,
+    relative = true
+}), {
+    repeating = true
+})
+hl.bind("SUPER + SHIFT + down", hl.dsp.window.resize({
+    x = 0,
+    y = resize_step,
+    relative = true
+}), {
+    repeating = true
+})
+
+-- Tukar posisi window fokus dengan window di arah panah, SUPER + ALT + arrow
+-- * direction pakai kata penuh ("left"/"right"/dst), bukan singkatan l/r/u/d
+--   kayak classic swapwindow -- singkatan bikin dispatcher gak nemu window
+--   tetangganya sama sekali
+-- * Cuma kerasa efeknya kalau ada 2+ window tiled di workspace yang sama
+hl.bind("SUPER + ALT + left", hl.dsp.window.swap({
+    direction = "left"
+}))
+hl.bind("SUPER + ALT + right", hl.dsp.window.swap({
+    direction = "right"
+}))
+hl.bind("SUPER + ALT + up", hl.dsp.window.swap({
+    direction = "up"
+}))
+hl.bind("SUPER + ALT + down", hl.dsp.window.swap({
+    direction = "down"
+}))
+
 hl.bind("CTRL + SUPER + right", hl.dsp.focus({
     workspace = "+1"
 }))

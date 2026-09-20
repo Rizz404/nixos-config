@@ -27,3 +27,9 @@ end)
 hl.on("hyprland.start", function()
     hl.exec_cmd("sh -c 'echo \"Xft.dpi: 144\" | xrdb -merge -'")
 end)
+
+-- Float window yang dibuka dari app lain, tile kalau dibuka langsung --
+-- lihat komentar di float-if-external.sh
+hl.on("hyprland.start", function()
+    hl.exec_cmd("~/.config/hypr/float-if-external.sh")
+end)
