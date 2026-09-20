@@ -40,8 +40,8 @@
       executable = true;
     };
 
-    "hypr/float-if-external.sh" = {
-      source = ./float-if-external.sh;
+    "hypr/smart-focus.sh" = {
+      source = ./smart-focus.sh;
       executable = true;
     };
 

@@ -22,19 +22,35 @@ hl.bind("SUPER + R", hl.dsp.exec_cmd(programs.menu))
 hl.bind("SUPER + P", hl.dsp.window.pseudo())
 hl.bind("SUPER + J", hl.dsp.layout("togglesplit")) -- dwindle only
 
+-- Toggle window fokus antara floating <-> tiling
+-- * Window yang di-toggle jadi floating otomatis di-resize ke ukuran wajar
+--   (900x600) + di-center, bukan ngewarisin ukuran tiled-nya yang sering
+--   nyaris fullscreen (auto-maximize) -- biar kalau ada beberapa window
+--   di-float bareng gak langsung numpuk penuh nutupin layar
+hl.bind("SUPER + SHIFT + SPACE", function()
+    hl.dispatch(hl.dsp.window.float({
+        action = "toggle"
+    }))
+    local win = hl.get_active_window()
+    if win and win.floating then
+        hl.dispatch(hl.dsp.window.resize({
+            x = 900,
+            y = 600
+        }))
+        hl.dispatch(hl.dsp.window.center())
+    end
+end)
+
 -- Move focus with SUPER + arrow keys
-hl.bind("SUPER + left", hl.dsp.focus({
-    direction = "left"
-}))
-hl.bind("SUPER + right", hl.dsp.focus({
-    direction = "right"
-}))
-hl.bind("SUPER + up", hl.dsp.focus({
-    direction = "up"
-}))
-hl.bind("SUPER + down", hl.dsp.focus({
-    direction = "down"
-}))
+-- * smart-focus.sh: fokus terarah bawaan Hyprland gak nyebrang antara
+--   window tiling & floating (dua domain terpisah, gak ada config buat
+--   nyatuin) -- script ini coba fokus arah biasa dulu, baru fallback nyari
+--   window terdekat di domain sebaliknya kalau gak ada tetangga di domain
+--   yang sama
+hl.bind("SUPER + left", hl.dsp.exec_cmd("~/.config/hypr/smart-focus.sh left"))
+hl.bind("SUPER + right", hl.dsp.exec_cmd("~/.config/hypr/smart-focus.sh right"))
+hl.bind("SUPER + up", hl.dsp.exec_cmd("~/.config/hypr/smart-focus.sh up"))
+hl.bind("SUPER + down", hl.dsp.exec_cmd("~/.config/hypr/smart-focus.sh down"))
 
 -- Resize focused window with SUPER + SHIFT + arrow keys
 -- * Cuma kerasa efeknya kalau ada window lain buat di-resize bareng di
@@ -68,6 +84,45 @@ hl.bind("SUPER + SHIFT + up", hl.dsp.window.resize({
 hl.bind("SUPER + SHIFT + down", hl.dsp.window.resize({
     x = 0,
     y = resize_step,
+    relative = true
+}), {
+    repeating = true
+})
+
+-- Geser window floating dengan keyboard, SUPER + CTRL + SHIFT + arrow
+-- * Dipakai buat mindahin window floating -- SUPER+drag (mouse:272 di bawah)
+--   KELIHATANNYA ngegeser window floating pas ditahan, tapi begitu dilepas
+--   di atas/deket window tiled, Hyprland nge-insert dia balik ke tiling
+--   tree (dwindle drag-to-tile), bukan cuma numpuk keliatannya doang.
+--   Dikonfirmasi langsung: mindahin lewat dispatcher (bukan mouse drag)
+--   walopun ditumpuk PERSIS di atas window tiled tetap floating, gak
+--   ke-insert -- makanya nudge keyboard ini yang reliable buat floating,
+--   bukan drag mouse.
+local move_step = 40
+hl.bind("SUPER + CTRL + SHIFT + left", hl.dsp.window.move({
+    x = -move_step,
+    y = 0,
+    relative = true
+}), {
+    repeating = true
+})
+hl.bind("SUPER + CTRL + SHIFT + right", hl.dsp.window.move({
+    x = move_step,
+    y = 0,
+    relative = true
+}), {
+    repeating = true
+})
+hl.bind("SUPER + CTRL + SHIFT + up", hl.dsp.window.move({
+    x = 0,
+    y = -move_step,
+    relative = true
+}), {
+    repeating = true
+})
+hl.bind("SUPER + CTRL + SHIFT + down", hl.dsp.window.move({
+    x = 0,
+    y = move_step,
     relative = true
 }), {
     repeating = true
@@ -135,6 +190,9 @@ hl.bind("SUPER + mouse_up", hl.dsp.focus({
 }))
 
 -- Move/resize windows with "SUPER" + LMB/RMB and dragging
+-- * Buat window FLOATING, drag mouse (LMB) ini bisa ke-insert balik ke
+--   tiling kalau dilepas di atas/deket window tiled -- lihat catatan di
+--   SUPER+CTRL+SHIFT+arrow di atas buat cara yang reliable
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), {
     mouse = true
 })
