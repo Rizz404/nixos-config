@@ -29,6 +29,16 @@
   # * Power button buat sleep saat aktif bukan langsung poweroff
   services.logind.settings.Login.HandlePowerKey = "suspend";
 
+  # * Jaring pengaman di level systemd-logind (jalan bahkan sebelum login,
+  #   termasuk pas nongkrong di greeter SDDM) - idle rule Noctalia
+  #   (dim/lock/screen-off) cuma jalan di DALAM sesi Hyprland yang udah
+  #   login, jadi kalau lupa gak jadi login abis nyalain laptop, layar bakal
+  #   nyala terus tanpa batas. Auto-suspend abis 15 menit idle nutup celah itu.
+  services.logind.settings.Login = {
+    IdleAction = "suspend";
+    IdleActionSec = "15min";
+  };
+
   time.timeZone = "Asia/Jakarta";
   i18n.defaultLocale = "en_US.UTF-8";
 

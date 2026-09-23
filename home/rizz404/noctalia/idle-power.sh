@@ -4,23 +4,30 @@
 #
 # Noctalia gak punya kondisional bawaan buat "beda timeout kalau lagi
 # charge vs enggak" — cuma named behavior + timeout tetap per nama. Makanya
-# tiap mode (dim, screen-off, lock) didefinisikan DUA behavior (varian -ac
-# timeout panjang, varian -battery timeout pendek) yang jalan berbarengan,
-# tapi masing-masing cek sendiri status charging saat itu lewat script ini
-# dan no-op kalau timernya "gak nyambung" sama kondisi aktual (misal varian
+# tiap mode (dim, lock) didefinisikan DUA behavior (varian -ac timeout
+# panjang, varian -battery timeout pendek) yang jalan berbarengan, tapi
+# masing-masing cek sendiri status charging saat itu lewat script ini dan
+# no-op kalau timernya "gak nyambung" sama kondisi aktual (misal varian
 # battery keburu nyala pas laptop lagi di-charge -> dibiarin aja).
 #
-# screen-off dipakai lewat `noctalia msg dpms-*` (bukan native action
-# "screen_off") justru biar bisa di-gate per tier kayak di atas; efeknya
-# sama, cuma monitor mati, BUKAN suspend/sleep.
+# mode "lock" sengaja gabungin dpms-off (screen off) + session lock dalam
+# SATU behavior (bukan 2 behavior terpisah kayak dulu). Alasannya: bug
+# upstream Noctalia (github.com/noctalia-dev/noctalia/issues/4190) -
+# munculnya lockscreen bikin idle daemon keliru nge-"resume" behavior lain
+# yang udah kepicu duluan (mis. dim jadi balik terang lagi), padahal
+# seharusnya cuma re-arm buat siklus berikutnya. Kalau screen-off jadi
+# behavior TERPISAH yang nyala belakangan (kayak dulu), dia sendiri kena
+# reset itu tiap kali lock nyala duluan - efeknya layar gak pernah beneran
+# mati. Fix-nya: dpms-off dijalanin LEBIH DULU, baru lock - jadi pas
+# lockscreen muncul & idle daemon keliru resume, backlight udah mati duluan
+# jadi gak keliatan efeknya (dim yang ke-resume juga gak masalah, wong
+# layarnya mati).
 #
-# lock juga lewat `noctalia msg session lock` (bukan native action "lock")
-# dengan alasan sama - biar timeout-nya beda antara AC & baterai. Gak ada
-# fase "resume" buat lock (unlock-nya lewat password di lockscreen, bukan
-# idle resume kayak dim/screen-off).
+# lock & dpms dipakai lewat `noctalia msg ...` (bukan native action
+# "lock"/"screen_off") biar bisa di-gate per tier kayak di atas.
 #
 # $1 = tier yang mau dicek ("ac" atau "battery")
-# $2 = mode ("dim", "screen-off", atau "lock")
+# $2 = mode ("dim" atau "lock")
 # $3 = phase ("start" atau "resume")
 
 set -euo pipefail
@@ -67,13 +74,11 @@ case "$mode-$phase" in
     dim-resume)
         brightnessctl -r >/dev/null
         ;;
-    screen-off-start)
-        noctalia msg dpms-off
-        ;;
-    screen-off-resume)
-        noctalia msg dpms-on
-        ;;
     lock-start)
+        noctalia msg dpms-off
         noctalia msg session lock
+        ;;
+    lock-resume)
+        noctalia msg dpms-on
         ;;
 esac

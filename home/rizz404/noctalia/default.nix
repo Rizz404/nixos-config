@@ -185,7 +185,12 @@ in
 
       idle = {
         pre_action_fade_seconds = 0;
-        # * Screenoff harus lebh lama daripada lockscreen, biar lockscreen gak nyalain layar lagi
+        # * lock & screen-off DIGABUNG jadi satu behavior (bukan screenoff
+        # * terpisah 30 detik setelah lock kayak dulu) - workaround bug upstream
+        # * Noctalia (github.com/noctalia-dev/noctalia/issues/4190) yang bikin
+        # * lockscreen muncul keliru nge-"resume" behavior lain yang udah
+        # * kepicu duluan (layar jadi terang lagi alih-alih mati). Detail di
+        # * idle-power.sh. Hapus workaround ini kalau upstream udah fix (PR #4002).
         behavior = {
           dim-ac = {
             enabled = true;
@@ -199,13 +204,7 @@ in
             timeout = 870; # 14.5 menit, saat di-charge
             action = "command";
             command = "${idlePowerScript} ac lock start";
-          };
-          screenoff-ac = {
-            enabled = true;
-            timeout = 900; # 15 menit (30 detik setelah lock-ac), saat di-charge
-            action = "command";
-            command = "${idlePowerScript} ac screen-off start";
-            resume_command = "${idlePowerScript} ac screen-off resume";
+            resume_command = "${idlePowerScript} ac lock resume";
           };
           dim-battery = {
             enabled = true;
@@ -219,13 +218,7 @@ in
             timeout = 570; # 9.5 menit, saat pakai baterai
             action = "command";
             command = "${idlePowerScript} battery lock start";
-          };
-          screenoff-battery = {
-            enabled = true;
-            timeout = 600; # 10 menit (30 detik setelah lock-battery), saat pakai baterai
-            action = "command";
-            command = "${idlePowerScript} battery screen-off start";
-            resume_command = "${idlePowerScript} battery screen-off resume";
+            resume_command = "${idlePowerScript} battery lock resume";
           };
         };
       };
