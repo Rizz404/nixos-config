@@ -160,7 +160,10 @@ in
         urgent_color = "error";
       };
 
-      # * Biar bisa pake widgets di desktop
+      # * Widget desktop diatur langsung di ~/.local/state/noctalia/settings.toml
+      # * (lewat GUI editor atau edit manual), BUKAN di sini - biar gak perlu
+      # * rebuild tiap kali mau ganti/geser widget. Lihat sticker-random.sh buat
+      # * hook random gambar sticker-nya.
       desktop_widgets = {
         enabled = true;
       };
