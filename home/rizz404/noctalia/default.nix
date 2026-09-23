@@ -75,6 +75,7 @@ in
       wallpaper = {
         directory = "~/Pictures/Wallpapers";
         transition = [ "wipe" ];
+        transition_on_startup = true;
         automation = {
           enabled = true;
           interval_seconds = 3600;
