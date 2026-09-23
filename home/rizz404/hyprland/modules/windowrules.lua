@@ -81,6 +81,21 @@ hl.window_rule({
     float = true
 })
 
+-- Waydroid full UI (`waydroid show-full-ui`, class "Waydroid") ngunci ukuran
+-- display Android dari ukuran window pertama kali muncul dan gak ngikutin
+-- resize sesudahnya. Kalau dia kena "auto-maximize" / di-tile setengah layar
+-- bareng window lain, Android tetap ngira ukurannya yang lama → layout
+-- kepotong / gak pas sama window. Dipaksa fullscreen biar ukurannya selalu
+-- konsisten = ukuran monitor. Window per-app mode multi_windows punya class
+-- "waydroid.<package>" jadi gak kena rule ini.
+hl.window_rule({
+    name = "fullscreen-waydroid",
+    match = {
+        class = "^(Waydroid)$"
+    },
+    fullscreen = true
+})
+
 -- Sebagian app render window-nya ke buffer ARGB yang punya alpha channel di
 -- hampir semua piksel (antialiasing teks, rounded corner, shadow client-side)
 -- walau window-nya niatnya opaque penuh. decoration.blur.enabled global di
