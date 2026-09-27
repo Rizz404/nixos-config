@@ -20,5 +20,6 @@
     lutris             # kelola game Windows-only dari luar Steam (GOG installer, itch, dll)
     wineWowPackages.stable
     winetricks
+    prismlauncher
   ];
 }
