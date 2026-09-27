@@ -19,15 +19,24 @@ let
       rev = "892aa42b50e6f57a5065b6f4df8c4e0a3913c9ee";
       hash = "sha256-yZhM+zuyv5PlcD5tya6EzJbSx382HJNb9F5Kaj4tWNY=";
     };
+    # NicolaiSoeborg/filemanager-plugin was never ported to micro's v2 Lua API
+    # (still uses the old bare MakeCommand/messenger/CurView globals), so it
+    # crashes on load with a recent micro. micro-editor/updated-plugins carries
+    # a fixed fork that uses the current import("micro/...") API.
     filemanager = fetchPlugin {
-      owner = "NicolaiSoeborg"; repo = "filemanager-plugin";
-      rev = "76145693baeb4c06cb7728fcf8931ae2980f30ce";
-      hash = "sha256-R4uSZOf8H9tu+v31fFQ+CcUEGxhVAmE9c/1vK8pxM+o=";
+      owner = "micro-editor"; repo = "updated-plugins";
+      rev = "216ec3adaf3adec78665614402ece56cf60ae713";
+      hash = "sha256-bYM+ZOxCbWDuN6/iWzRLxGrQr24Pe+WETRa9cXK076A=";
+      subdir = "filemanager-plugin";
     };
+    # Same story as filemanager: samdmarshall/micro-fzf-plugin targets the old
+    # v1 API and errors on every micro startup ("fzf:27: attempt to call a
+    # non-function object"). Use the ported version from the same fork above.
     fzf = fetchPlugin {
-      owner = "samdmarshall"; repo = "micro-fzf-plugin";
-      rev = "ebc6baa05c3532ccaf9139b1d38a8791d6d5ba7d";
-      hash = "sha256-tmQBBiRc/hR09KUkNUT/nwD/AfC8k1eIopJPKb8+3qo=";
+      owner = "micro-editor"; repo = "updated-plugins";
+      rev = "216ec3adaf3adec78665614402ece56cf60ae713";
+      hash = "sha256-bYM+ZOxCbWDuN6/iWzRLxGrQr24Pe+WETRa9cXK076A=";
+      subdir = "fzf";
     };
     jump = fetchPlugin {
       owner = "terokarvinen"; repo = "micro-jump";
