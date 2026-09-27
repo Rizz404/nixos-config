@@ -72,6 +72,7 @@
     qpdf
     file
     gallery-dl
+    nvme-cli
 
     # database and its tools
     pgcli
