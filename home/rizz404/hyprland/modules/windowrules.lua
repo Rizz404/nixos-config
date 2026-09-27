@@ -11,6 +11,28 @@ hl.window_rule({
     suppress_event = "maximize"
 })
 
+-- WezTerm (class org.wezfurlong.wezterm, dicek via `hyprctl clients -j`) render
+-- ulang tiap terima event resize dari compositor. Pas dia kena tile (mis. buka
+-- window kedua bikin dwindle ngebagi split), animasi "windows"/"windowsIn" di
+-- modules/hyprland/animations.lua ngirim BANYAK event resize perantara sepanjang
+-- animasi (bukan cuma satu lompatan ke ukuran akhir). Reflow scrollback WezTerm
+-- ke tiap ukuran perantara itu ngerusak baris yang punya karakter lebar (nerd
+-- font icon/ASCII art fastfetch) kalau tergilas ke lebih sempit lalu balik lebar
+-- lagi pas animasi settle — window yang UDAH kebuka sebelum tile jadi "rusak".
+-- Window yang BARU dibuka pas tiling juga bisa keburu render (mis. fastfetch)
+-- sebelum animasi selesai ke ukuran final, jadi teksnya kepotong.
+-- Matiin animasi resize/gerak khusus buat WezTerm (bukan global) bikin tiling
+-- langsung lompat ke ukuran akhir tanpa event perantara, ngilangin race
+-- condition ini tanpa ngorbanin animasi window app lain.
+hl.window_rule({
+    name = "no-resize-anim-wezterm",
+    match = {
+        class = "^(org\\.wezfurlong\\.wezterm)$"
+    },
+
+    animation = "noanim"
+})
+
 hl.window_rule({
     -- Fix some dragging issues with XWayland
     name = "fix-xwayland-drags",

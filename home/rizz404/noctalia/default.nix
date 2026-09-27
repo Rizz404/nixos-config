@@ -35,12 +35,27 @@ in
         templates = {
           enable_builtin_templates = true;
           # * hyprland = border window, wezterm = terminal, gtk3/gtk4/qt = app non-KDE,
-          # * kcolorscheme = Dolphin & app KDE lain
-          builtin_ids = [ "hyprland" "wezterm" "gtk3" "gtk4" "qt" "kcolorscheme" ];
+          # * kcolorscheme = Dolphin & app KDE lain, btop = warna color_theme btop.conf
+          # * starship SENGAJA gak dimasukin - starship.toml di-manage home-manager
+          # * (symlink read-only ke /nix/store), template Noctalia gak bisa nulis ke situ
+          builtin_ids = [ "hyprland" "wezterm" "gtk3" "gtk4" "qt" "kcolorscheme" "btop" ];
 
           enable_community_templates = true;
           # * vscode sengaja gak dipakai - settings.json-nya di-sync ke perangkat non-Linux juga
-          community_ids = [ "brave" ];
+          # * micro SENGAJA gak dimasukin - colorschemes/ & settings.json micro juga
+          # * symlink read-only ke /nix/store (sama kasusnya kayak starship di atas)
+          community_ids = [
+            "brave"
+            "bat"
+            "fastfetch"
+            "fzf"
+            "lazygit"
+            "telegram"
+            "zellij"
+            "claude-code"
+            "steam"
+            "prismlauncher"
+          ];
 
           # * Template custom buat theme SDDM noctalia-sync
           user.qylock-colors = {
