@@ -133,6 +133,16 @@ for i = 1, 10 do
     }))
 end
 
+-- Tukar SEMUA window antara workspace aktif dengan workspace [0-9], SUPER +
+-- CTRL + SHIFT + [0-9]
+-- * Beda dari SUPER+SHIFT+n (cuma mindahin window aktif) -- ini nuker isi
+--   dua workspace sekaligus, kayak "workspace 1 dan 2 saling tukar semua
+--   window"-nya
+for i = 1, 10 do
+    local key = i % 10 -- 10 maps to key 0
+    hl.bind("SUPER + CTRL + SHIFT + " .. key, hl.dsp.exec_cmd("~/.config/hypr/swap-workspaces.sh " .. i))
+end
+
 -- Example special workspace (scratchpad)
 hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("magic"))
 hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({
