@@ -44,6 +44,13 @@ in
     settings = {
       START_CHARGE_THRESH_BAT0 = 50;
       STOP_CHARGE_THRESH_BAT0 = 90;
+
+      # * Default TLP nyalain WiFi power-save di baterai - radio jadi sleep/wake
+      #   berkala buat hemat daya, tapi ini bikin sering CTRL-EVENT-BEACON-LOSS
+      #   (kelewat beacon dari AP/hotspot pas radio lagi sleep) yang manifest
+      #   sebagai koneksi macet sesaat, termasuk sesi SSH yang jadi freeze total.
+      WIFI_PWR_ON_AC = "off";
+      WIFI_PWR_ON_BAT = "off";
     };
   };
 
