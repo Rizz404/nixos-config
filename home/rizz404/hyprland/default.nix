@@ -71,6 +71,7 @@
     "hypr/modules/hyprland/input.lua".source = ./modules/input.lua;
     "hypr/modules/hyprland/keybindings.lua".source = ./modules/keybindings.lua;
     "hypr/modules/hyprland/windowrules.lua".source = ./modules/windowrules.lua;
+    "hypr/modules/hyprland/rustdesk.lua".source = ./modules/rustdesk.lua;
   };
 
 }
