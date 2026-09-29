@@ -73,6 +73,7 @@
     file
     gallery-dl
     nvme-cli
+    gnupg
 
     # database and its tools
     pgcli
