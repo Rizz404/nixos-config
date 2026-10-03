@@ -19,6 +19,10 @@
 
     noctalia.url = "github:noctalia-dev/noctalia";
 
+    # * Sengaja gak pakai `inputs.nixpkgs.follows`: flake ini cuma dites sama nixpkgs-unstable
+    #   miliknya sendiri, dan itu juga yang bikin cache.numtide.com kena hit.
+    llm-agents.url = "github:numtide/llm-agents.nix";
+
     qylock = {
       # * Mode dev: pakai clone lokal biar tiap edit QML langsung kepake tanpa
       #   push ke GitHub dulu. Balikin ke "github:Darkkal44/qylock" (atau fork sendiri)

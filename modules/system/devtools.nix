@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+  # * claude-code, opencode, codex diambil dari llm-agents (update harian) karena
+  #   nixpkgs stabil telat versinya, jadi model baru gak bisa diakses
+  llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   # biar command `locate` punya database yang ke-update otomatis (dipakai plocate)
   services.locate.enable = true;
@@ -16,7 +21,9 @@
     mpvScripts.mpris
 
     # cli tools
-    claude-code
+    llmAgents.claude-code
+    llmAgents.opencode
+    llmAgents.codex
     gh
     lazygit
     micro
@@ -74,8 +81,6 @@
     gallery-dl
     nvme-cli
     gnupg
-    opencode
-    codex
 
     # database and its tools
     pgcli
