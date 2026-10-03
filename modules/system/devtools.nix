@@ -74,6 +74,8 @@
     gallery-dl
     nvme-cli
     gnupg
+    opencode
+    codex
 
     # database and its tools
     pgcli
