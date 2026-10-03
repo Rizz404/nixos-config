@@ -1,4 +1,5 @@
 local wezterm = require 'wezterm'
+local act = wezterm.action
 local config = wezterm.config_builder()
 
 -- config.color_scheme = 'nord'
@@ -46,5 +47,54 @@ config.enable_scroll_bar = true
 --   (lihat docs/noctalia-ricing-guide.md section 8). wezterm.lua ini symlink read-only ke Nix
 --   store jadi auto-insert-nya Noctalia gagal nulis - baris ini ditambahin manual sebagai gantinya.
 config.color_scheme = 'Noctalia'
+
+-- Keybindings tambahan (di luar default bawaan WezTerm, lihat
+-- https://wezterm.org/config/default-keys.html untuk daftar lengkapnya --
+-- copy/paste/tab-switching/dst udah dihandle default, gak perlu di-define ulang)
+--
+-- * Modifier dipisah per "domain" biar selaras & gak tabrakan sama Hyprland/
+--   Noctalia (lihat home/rizz404/hyprland & home/rizz404/noctalia):
+--   SUPER      = window manager & shell (Hyprland + Noctalia)
+--   CTRL+ALT   = jalanin aplikasi (CTRL+ALT+T buka terminal ini di Hyprland)
+--   CTRL+SHIFT = shortcut internal WezTerm (namespace default WezTerm sendiri)
+config.keys = {
+  -- Select all: WezTerm gak punya action "select all" bawaan, jadi masuk
+  -- copy mode, pilih dari baris paling atas scrollback sampai paling bawah,
+  -- copy ke clipboard, lalu langsung keluar copy mode lagi
+  {
+    key = 'A',
+    mods = 'CTRL|SHIFT',
+    action = act.Multiple {
+      act.ActivateCopyMode,
+      { CopyMode = 'MoveToScrollbackTop' },
+      { CopyMode = { SetSelectionMode = 'Line' } },
+      { CopyMode = 'MoveToScrollbackBottom' },
+      act.CopyTo 'ClipboardAndPrimarySelection',
+      { CopyMode = 'Close' },
+    },
+  },
+
+  -- Split pane lebih ergonomis dibanding default (CTRL+SHIFT+ALT+" / %) --
+  -- "\" kebayang garis vertikal (split ke samping), "-" garis horizontal
+  -- (split ke bawah)
+  {
+    key = '\\',
+    mods = 'CTRL|SHIFT',
+    action = act.SplitPane { direction = 'Right' },
+  },
+  {
+    key = '-',
+    mods = 'CTRL|SHIFT',
+    action = act.SplitPane { direction = 'Down' },
+  },
+
+  -- Tutup pane aktif aja (bukan seluruh tab) -- konsisten sama konvensi
+  -- "Q = close" punya Hyprland (SUPER+Q nutup window)
+  {
+    key = 'Q',
+    mods = 'CTRL|SHIFT',
+    action = act.CloseCurrentPane { confirm = true },
+  },
+}
 
 return config
