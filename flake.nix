@@ -42,6 +42,7 @@
         ./modules/system/plymouth.nix
         ./modules/system/shell.nix
         ./modules/system/devtools.nix
+        ./modules/system/databases.nix
         ./modules/system/network.nix
         ./modules/system/containers.nix
         ./modules/system/swap.nix

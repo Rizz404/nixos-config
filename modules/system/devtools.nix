@@ -82,11 +82,6 @@ in
     nvme-cli
     gnupg
 
-    # database and its tools
-    pgcli
-    postgresql
-    mycli
-
     # programming language
     php
     php.packages.composer
