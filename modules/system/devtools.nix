@@ -81,6 +81,9 @@ in
     gallery-dl
     nvme-cli
     gnupg
+    inetutils
+    lftp
+    filezilla
 
     # programming language
     php
